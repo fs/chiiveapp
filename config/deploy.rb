@@ -1,5 +1,5 @@
 set :application, "chiiveapp"
-set :repository,  "git@github.com:fs/chiiveapp.git"
+set :repository,  "git://github.com/fs/chiiveapp.git"
 set :scm, :git
 set :branch, "master"
 set :rails_env, "production"
