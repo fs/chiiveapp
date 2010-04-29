@@ -1,0 +1,553 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 				0;
+	padding: 				0;
+	border: 				0;
+	outline: 				0;
+	font-size: 				100%;
+	vertical-align:			baseline;
+	background: 			transparent;
+}
+* {
+	font-family: 			arial, helvetica, sans-serif;
+}
+
+html {
+	font-size: 				50%; /* Part one of 1em = 10px */
+}
+
+body {
+	line-height: 			1;
+	
+	font-size: 				125%; /* Part two of 1em = 10px */
+	
+	/*part 1 of centering hack*/
+	text-align: 			center;	
+}
+
+a {
+	text-decoration:		none;
+	color:					#00bae3;
+}
+a:hover {
+	text-decoration:		underline;
+}
+
+ /* Good to have global classes
+--------------------------------*/
+.floatright {
+	float: 					right;
+}
+.floatleft {
+	float: 					left;
+}
+
+.alignright {
+	text-align:				right;
+}
+.half {
+	width:					48%;
+}
+.hide {
+	display:				none;
+}
+.nobg {
+	background:				none !important;
+}
+.noborder {
+	border:					0 !important;
+}
+.nomargin {
+	margin:					0 !important; 
+}
+
+
+ /* MAIN CONTAINER
+--------------------------------------------------------------------*/
+#wrapper {
+	width: 					760px;
+	
+	/*part 2 of centering hack*/
+	text-align: 			left;
+/*  margin:         0 auto;*/
+}
+
+
+ /* #body - Global elements (works in all columns)
+--------------------------------------------------------------------*/
+
+#body {
+	padding:				9px 0 40px 0;
+}
+
+
+ /* #maincontent
+--------------------------------------------------------------------*/
+
+#maincontent {
+	width:					763px;
+	float:					left;
+}
+
+#maincontent #masthead {
+	position:				relative;
+	z-index:				20;
+	left:					2px;
+	width:					782px;
+	height:					207px;
+	background:				#e2f2f9 url(http://anton.pm.flatsourcing.com/images/interface/bg_masthead.png) no-repeat 0 0;
+}
+#maincontent #masthead #logo {
+	position:				absolute;
+	left:					9px;
+	top:					-1px;
+	width:					217px;
+	height:					103px;
+}
+#maincontent #masthead #logo img {
+	display:				block;
+}
+#maincontent #masthead #websitelink {
+	display:				block;
+	position:				absolute;
+	right:					44px;
+	top:					18px;
+	width:					134px;
+	height:					14px;
+	text-indent:			-9999px;
+	background:				transparent url(http://anton.pm.flatsourcing.com/images/interface/copy.png) no-repeat 0 0;
+}
+
+#maincontent #masthead .copy {
+	position:				absolute;
+	text-indent:			-9999px;
+	background:				transparent url(http://anton.pm.flatsourcing.com/images/interface/copy.png) no-repeat;
+}
+#maincontent #masthead p.copy {
+	left:					457px;
+	top:					75px;
+	width:					289px;
+	height:					32px;
+	background-position:	0 -14px;
+}
+#maincontent #masthead ol.copy {
+	list-style-type:		none;
+	left:					465px;
+	top:					121px;
+	width:					257px;
+	height:					53px;
+	background-position:	0 -46px;
+}
+
+#maincontent #masthead #btn_appstore {
+	display:				inline;
+	position:				absolute;
+	left:					9px;
+	top:					123px;
+}
+#maincontent #masthead #btn_appstore a {
+	display:				block;
+	width:					164px;
+	height:					69px;
+	text-indent:			-9999px;
+	background:				transparent url(http://anton.pm.flatsourcing.com/images/interface/btn_appstore.png) no-repeat 0 0;
+}
+#maincontent #masthead #btn_appstore a:hover {
+	background-position:	0 -69px;
+}
+
+
+#maincontent #photoarea {
+	position:				relative;
+	top:					-3px;
+	z-index:				10;
+	padding:				28px 0 0 0;
+	background:				transparent url(http://anton.pm.flatsourcing.com/images/interface/bg_photoarea.png) no-repeat 0 0;
+}
+#maincontent #photoarea div.inner {
+	padding:				0 0 28px 0;
+	background:				transparent url(http://anton.pm.flatsourcing.com/images/interface/bg_photoarea.png) no-repeat -789px bottom;
+}
+#maincontent #photoarea div.content {
+	padding:				5px 11px 5px 10px;
+	background:				transparent url(http://anton.pm.flatsourcing.com/images/interface/bg_photoarea.png) repeat-y -1578px 0;
+}
+
+#maincontent #photoarea #info {
+	padding:				0 20px 20px 20px;
+	background:				transparent url(http://anton.pm.flatsourcing.com/images/interface/bg_info.jpg) no-repeat left bottom;
+}
+
+#maincontent #photoarea #info img {
+	float:					left;
+	margin:					2px 0 0 0;
+}
+
+#maincontent #photoarea #info h1,
+#maincontent #photoarea #info p {
+	margin:					0 0 0 60px;
+}
+
+#maincontent #photoarea #info p.by {
+	color:					#666666;
+	font-size:				1.3em;
+	line-height:			1.1em;
+}
+#maincontent #photoarea #info p.by strong {
+	color:					#000;
+}
+#maincontent #photoarea #info h1 {
+	font-size:				2.4em;
+	line-height:			1.2em;
+	color:					#75797d;
+	font-weight:			normal;
+}
+
+#maincontent #photoarea #info p.count {
+	color:					#75797d;
+	font-size:				1.4em;
+	line-height:			1.2em;
+	font-style:				italic;
+}
+
+#maincontent #photos {
+  width: 540px;
+	padding: 20px 0 23px 12px;
+	float:					left;
+	position:				relative;	
+}
+
+#maincontent #photos #ajaxloader {
+	position:				absolute;
+	left:					0;
+	top:					0;
+	width:					555px;
+	height:					500px;
+	background: 			#fff url(http://anton.pm.flatsourcing.com/images/interface/ajaxloader.gif) no-repeat 50% 50%;
+	z-index:				1000;
+	display:				none;
+} 
+
+#maincontent #photos img {
+	float:					left;
+	margin:					0 10px 10px 0;
+}
+
+#maincontent #photoarea #pagination  {
+	list-style-type:		none;
+	text-align:				center;
+	width:					530px;
+	margin:					20px 0 0 0;
+}
+#maincontent #photoarea #pagination li {
+	display:				inline;
+	color:					#393737;
+	font-size:				1.2em;
+	line-height:			1.5em;
+	padding:				2px 6px 3px 6px;
+	position:				relative;
+}
+#maincontent #photoarea #pagination li.prev {
+	padding-right:			24px;
+}
+#maincontent #photoarea #pagination li.next {
+	padding-left:			24px;
+}
+#maincontent #photoarea #pagination li.active {
+	border:					1px solid #e0e0e0;
+}
+#maincontent #photoarea #pagination li a {
+	font-weight:			bold;
+}
+
+#maincontent #photosby {
+	width:					189px;
+	float:					right;
+	background:				#ebebeb;
+	margin:					0 0 25px 0;
+	position:				relative;
+}
+
+#maincontent #photosby a {
+	font-weight:			bold;
+}
+
+#maincontent #photosby h2 {
+	font-size:				1.5em;
+	color:					#fff;
+	background:				#00a3d9 url(http://anton.pm.flatsourcing.com/images/interface/sprites.png) repeat-x 0 -58px;
+	border-top:				1px solid #ced2d4;
+	position:				relative;
+	top:					-1px;
+	margin:					0 0 3px 0;
+	padding:				0 13px;
+	line-height:			33px;
+}
+
+#maincontent #photosby p {
+	font-size:				1.1em;
+	line-height:			1.25em;
+	color:					#767676;
+}
+
+#maincontent #photosby div.entry {
+	margin:					0 3px 1px 3px;
+	padding:				6px 7px 8px 7px;
+	background-color:		#fff;
+}
+#maincontent #photosby div.entry img {
+	float:					left;
+	margin:					2px 0 0 0;
+	width: 35px;
+}
+#maincontent #photosby div.entry p {
+	margin:					0 0 0 43px;
+}
+#maincontent #photosby div.entry p strong {
+	color:					#404041;
+}
+#maincontent #photosby div.entry p a {
+	color:					#336faa;
+}
+
+#maincontent #photosby div.navigation {
+	font-size:				1.2em;
+	color:					#767676;
+	padding:				10px 0 12px 8px;
+}
+#maincontent #photosby div.navigation span {
+	padding:				0 10px;
+}
+
+#maincontent #photosby p.viewall {
+	position:				absolute;
+	bottom:					-21px;
+	left:					18px;
+}
+
+
+#maincontent #photo {
+	text-align:				center;
+	margin:					0 0 29px 0;
+}
+
+
+
+#maincontent #photodetail {
+	position:				relative;
+}
+
+#maincontent #photodetail div.navigation {
+	font-size:				1.3em;
+	line-height:			1.2em;
+	color:					#666666;
+	padding:				15px 0 12px 0;
+}
+#maincontent #photodetail div.navigation span {
+	padding:				0 10px;
+}
+#maincontent #photodetail div.navigation a {
+	font-weight:			bold;
+}
+
+#maincontent #photodetail #ajaxloader {
+	position:				absolute;
+	left:					0;
+	top:					0;
+	width:					768px;
+	background: 			#fff url(http://anton.pm.flatsourcing.com/images/interface/ajaxloader.gif) no-repeat 50% 250px;
+	z-index:				1000;
+	display:				none;
+} 
+
+
+#maincontent #photoby {
+	border-top:				1px solid #cfcfcf;
+	padding:				11px 10px;
+	position:				relative;
+}
+#maincontent #photoby img {
+	float:					left;
+}
+
+#maincontent #photoby h3,
+#maincontent #photoby p {
+	margin-left:			48px;
+}
+
+#maincontent #photoby h3 {
+	color:					#666666;
+	font-weight:			normal;
+	font-size:				1.5em;
+	line-height:			1.2em;
+}
+#maincontent #photoby h3 strong {
+	font-weight:			bold;
+	color:					#000;
+}
+#maincontent #photoby p {
+	font-size:				1.3em;
+	line-height:			1.31em;
+	color:					#666666;
+	margin-bottom:			3px;
+}
+#maincontent #photoby p.info {
+	font-size:				1.2em;
+	color:					#828282;
+}
+#maincontent #photoby div.share {
+	position:				absolute;
+	right:					24px;
+	top:					15px;
+	font-weight:			bold;
+	font-size:				1.1em;
+	padding:				0 0 0 22px;
+	width: 100px;
+/*  background:       transparent url(http://anton.pm.flatsourcing.com/images/interface/sprites.png) no-repeat 0 -28px;*/
+}
+
+#maincontent #comments {
+	background-color:		#ebebeb;
+	padding:				16px 180px 13px 57px;
+	position:				relative;
+}
+#maincontent #comments span.blurb {
+	position:				absolute;
+	width:					13px;
+	height:					7px;
+	left:					67px;
+	top:					10px;
+	background:				transparent url(http://anton.pm.flatsourcing.com/images/interface/sprites.png) no-repeat 0 0;
+}
+
+#maincontent #comments div.comment {
+	border:					1px solid #dbdbdb;
+	background-color:		#fff;
+	margin:					0 0 3px 0;
+	padding:				10px;
+}
+
+#maincontent #comments div.comment img {
+	float:					left;
+}
+
+#maincontent #comments div.comment p {
+	margin:					0 0 0 48px;
+}
+
+#maincontent #comments div.comment p {
+	font-size:				1.3em;
+	line-height:			1.31em;
+	color:					#666;
+}
+#maincontent #comments div.comment p strong {
+	color:					#000;
+}
+
+#maincontent #comments div.comment p.info {
+	font-size:				1.2em;
+	color:					#828282;
+}
+
+#maincontent #postcomment {
+	padding:				27px 0 70px 128px;
+	position:				relative;
+}
+#maincontent #postcomment img {
+	position:				absolute;
+	left:					58px;
+	top:					28px;
+}
+#maincontent #postcomment textarea {
+	font-size:				1.2em;
+	color:					#909090;
+	border:					1px solid #c4d2e0;
+	width:					454px;
+	height:					44px;
+	padding:				3px 2px;
+	margin:					0 0 12px 0;
+}
+#maincontent #postcomment p.login {
+	font-size:				1.2em;
+	line-height:			1.2em;
+	width:					120px;
+	padding:				0 0 0 3px;
+}
+
+ /* #sidebar
+--------------------------------------------------------------------*/
+
+#sidebar {
+	width:					162px;
+	float:					right;
+	padding:				58px 0 0 0;
+}
+
+
+ /* #footer
+--------------------------------------------------------------------*/
+#footer {
+	clear:					both;
+}
+
+
+table {
+	border-collapse:		collapse;
+	border-spacing: 		0;
+}  
+
+
+.clearfix:after,
+#body:after,
+div.entry:after,
+div.comment:after {
+    content: 				"."; 
+    display: 				block; 
+    height: 				0; 
+    clear: 					both; 
+    visibility: 			hidden;
+}
+
+
+div.share .share_and_hide {
+  margin-bottom: 10px;
+}
+
+.wallkit_frame {
+  width: 740px;
+}
+
+.wallkit_frame .UIImageBlock.subtitle_left {
+  display: none;
+}
+
+.wallkit_posts {
+/*  position: relative;*/
+  background: #EBEBEB;
+  padding: 16px 180px 13px 57px;
+}
+.wallkit_post {
+  width: 600px;
+  background: #FFF;
+  border: 1px solid #DBDBDB;
+  margin: 0 0 3px;
+  padding: 10px;
+}
+
+.wallkit_form {
+  width: 600px;
+}
+
+.show_connected { padding: 27px 0 70px 68px; }
+.show_connected .wallkit_form textarea { margin: 0; }
+.wallkit_form div.post_area { float: none; padding: 5px 5px 5px 0; }
+.wallkit_form div.post_area .uiButton { padding-bottom: 0; }
+.uiButton input { background: #EBEBEB; color: #000000; padding:5px; }
+.uiButton input:hover { text-decoration: underline; }

@@ -1,0 +1,7 @@
+<%= fb_comments "#{title ||= 'chiiveapp_comments'}", true, false, 10,
+      :quiet       => true,
+      :callbackurl => root_url,
+      :showform    => true,
+      :simple      => true,
+      :reverse     => true
+%>

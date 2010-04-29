@@ -1,0 +1,80 @@
+<div id="info">
+  <%= image_tag 'copy/thumb_50x50.jpg' %>
+	
+	<p class="by"><strong>John Smith</strong> posted</p>
+	
+	<h1>Daniel’s Birthday Night in the Mission</h1>
+	
+	<p class="count">
+	  <strong><%= pluralize User.count, 'person' %></strong>
+	  took
+	  <strong><%= pluralize Photo.count, 'photo' %></strong>
+	</p>
+</div>
+
+<div id="photodetail">
+	<div id="ajaxloader">&nbsp;</div>
+	<div class="photocontent">
+							  
+    <div id="photo">
+    	<div class="navigation">
+    	  <% if @photo.previous_photo %>
+    	    <%= link_to 'Previous', @photo.previous_photo %>
+    	  <% else %>
+    	    Previous
+    	  <% end %>
+    	  <span><%= @photo.id %> of <%= Photo.count %></span>
+    	  <% if @photo.next_photo %>
+    	    <%= link_to 'Next', @photo.next_photo %>
+    	  <% else %>
+    	    Next
+    	  <% end %>
+    	</div>
+    	<%= image_tag(@photo.image_url) %>
+    </div>
+
+    <div id="photoby">
+      <%= fb_profile_pic(@photo.user.facebook_uid || '100000066328092', :width => 35, :height => 35) %>
+
+    	<h3>Photo By: <strong><%= user_name(@photo.user) %></strong></h3>
+    	<p>Check out who just arrived!</p>
+    	<p class="info">Posted on <%= @photo.created_at.strftime('%d/%m/%Y') %></p>
+
+    	<div class="share">
+    	  <%= fb_share_button photo_url(@photo) %>
+    	  <fb:iframe src="http://www.facebook.com/plugins/like.php?href=<%= CGI.escape photo_url(@photo) %>&amp;layout=button_count&amp;show_faces=true&amp;width=150&amp;action=like&amp;colorscheme=light" scrolling="no" frameborder="0" allowTransparency="true" style="border:none; overflow:hidden; width:150px; height: 30px;"></iframe>
+    	</div>
+    </div>
+
+    <%= render 'layouts/comments', :title => "chiiveapp_photo_#{@photo.id}" %>
+
+    <!-- <div id="comments">
+
+      <span class="blurb">&nbsp;</span>
+
+
+      <div class="comment">
+        <%= image_tag 'copy/thumb2_35x35.jpg' %>
+
+        <p><strong>Katy Freathy</strong> beautiful</p>
+        <p class="info">9 hours ago</p>
+      </div>
+
+    </div>
+
+    <div id="postcomment">
+          
+      <form action="#">
+        <div>
+          <%= image_tag 'copy/fbjohndoe.jpg' %>
+              
+          <textarea cols="50" rows="4" title="Add a comment…">Add a comment…</textarea>
+        </div>
+      </form>
+            
+      <p class="login">Log into facebook to post your comment</p>
+          
+    </div> -->
+
+  </div>
+</div>

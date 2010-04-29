@@ -1,0 +1,64 @@
+<div id="info">
+  <%= image_tag 'copy/thumb_50x50.jpg' %>
+	
+	<p class="by"><strong>John Smith</strong> posted</p>
+	
+	<h1>Daniel’s Birthday Night in the Mission</h1>
+	
+	<p class="count">
+	  <strong><%= pluralize User.count, 'person' %></strong>
+	  took
+	  <strong><%= pluralize Photo.count, 'photo' %></strong>
+	</p>
+</div>
+
+<div id="photos">
+	<div id="ajaxloader">&nbsp;</div>	
+	<div class="photoscontent">
+
+		<div class="clearfix">
+		  <% @photos.each do |photo| %>
+		    <%= link_to image_tag(photo.thumb_url), photo %>
+		  <% end %>
+		</div>
+
+    <ul id="pagination">
+      <li class="prev">
+        <% if @photos.current_page > 1 %>
+          <%= link_to "&laquo; Previous", photos_path(:page => @photos.current_page - 1) %>
+        <% else %>
+          &laquo; Previous
+        <% end %>
+      </li>
+      <% @photos.total_pages.times do |i| %>
+        <li<% if i + 1 == @photos.current_page %> class="active"<% end %>>
+          <%= link_to i + 1, photos_path(:page => i + 1) %>
+        </li>
+      <% end %>
+      <li class="next">
+        <% if @photos.current_page < @photos.total_pages %>
+          <%= link_to "Next &raquo;", photos_path(:page => @photos.current_page + 1) %>
+        <% else %>
+          Next &raquo;
+        <% end %>
+      </li>
+    </ul>
+    
+	</div>
+	
+</div><!-- /photos -->	
+
+<div id="photosby">
+	<h2>Photos By:</h2>
+	
+	<% User.all.each do |user| %>
+  	<div class="entry">
+  	  <%= fb_profile_pic(user.facebook_uid, :size => :square) %>
+  		<p><strong>
+  		  <%= user_name(user) %>
+  		  </strong><br />
+  		  <%= user.photos.count %> photos
+  		</p>
+  	</div>
+	<% end %>	
+</div><!-- /photosby -->	
