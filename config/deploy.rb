@@ -25,9 +25,9 @@ namespace :deploy do
   
   desc "Symlink config files"
   task :symlink_configs, :roles => :app do
-    # %w[facebooker.yml].each do |f|
-    #   run "ln -sf #{shared_path}/config/#{f} #{release_path}/config/#{f}"
-    # end
+    %w[facebooker.yml].each do |f|
+      run "ln -sf #{shared_path}/config/#{f} #{release_path}/config/#{f}"
+    end
     run "ln -sf #{shared_path}/production.sqlite3 #{release_path}/db/production.sqlite3"
   end
 end
