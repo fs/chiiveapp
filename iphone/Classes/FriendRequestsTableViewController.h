@@ -1,0 +1,20 @@
+//
+//  FriendRequestsTableViewController.h
+//  spyglass
+//
+//  Created by 17FEET on 4/5/10.
+//  Copyright 2010 17FEET. All rights reserved.
+//
+
+#import "UserTableViewController.h"
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+@interface UserRequestsDataSource : CHListDataSource
+@end
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+@interface FriendRequestsTableViewController : UserTableViewController
+@end

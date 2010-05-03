@@ -1,0 +1,151 @@
+<% form_for @user, :html => { :multipart => true, :class => 'user', :style => 'float: left;' } do |f| %>
+<%= f.hidden_field :home_latitude %>
+<%= f.hidden_field :home_longitude %>
+
+  <h2><%= title %></h2>
+  <%= f.error_messages %>
+
+<fieldset>
+  <legend>Account Info</legend>
+  <p>
+    <%= f.label :login, "Username" %><br />
+    <%= f.text_field :login %>
+  </p>
+  <p>
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </p>
+  <p>
+    <%= f.label :password %><br />
+    <%= f.password_field :password %>
+  </p>
+  <p>
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation %>
+  </p>
+  <% if current_user.is_admin? || defined?(@fake_admin) %>
+  <p>
+    <label>Role</label><br />
+	
+	<input type="checkbox" name="role[admin]" id="role[admin]" value="yes" <%= "checked=\"checked\"" if @user.is_admin? %> />
+	<label for="role[admin]">Admin</label><br />
+	
+	<input type="checkbox" name="role[moderator]" id="role[moderator]" value="yes" <%= "checked=\"checked\"" if @user.is_moderator? %> />
+	<label for="role[moderator]">Moderator</label><br />
+  </p>
+  <% end %>
+</fieldset>
+
+<fieldset class="optional">
+  <legend>Optional</legend>
+  <p>
+	<%= image_tag(@user.avatar_path) %>
+	<br />
+	<%= f.file_field :avatar_image %>
+  </p>
+  <p>
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name %>
+  </p>
+  <p>
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name %>
+  </p>
+  <p>
+    <%= f.label :name, "Full Name" %><br />
+    <%= f.text_field :name %>
+  </p>
+</fieldset>
+
+<div class="clear"><!-- --></div>
+  <p>
+	<%= f.submit "Save" %>
+	<%= link_to "Cancel", @user, :class => 'cancel' %>
+  </p>
+<% end %>
+
+<form action="/" onsubmit="showUserHomeAddress(this.address.value); return false">
+  <h2>Home Location</h2>
+	<fieldset>
+  	  <legend>PersonalSet home location</legend>
+	  <p>
+	    <%= label_tag :address, "Search for address" %><br />
+	    <%= text_field_tag :address %>
+		<input type="submit" value="find" />
+	  </p>
+	  <div id="user_home_map" class="map"></div>
+	</fieldset>
+</form>
+
+<script type="text/javascript">
+
+var userHomeMap = null;
+var userHomeGeocoder = null;
+var userHomeMarker = null;
+
+function showUserHomeMap() {
+	if (!GBrowserIsCompatible())
+		return;
+
+	userHomeMap = new GMap2(document.getElementById('user_home_map'));
+	userHomeGeocoder = new GClientGeocoder();
+	
+	userHomeMarker = new GMarker(
+		new GLatLng(<%= @user.home_latitude %>, <%= @user.home_longitude %>),
+		{
+			icon : addOptionsToIcon(new GIcon(),{
+				iconSize : new GSize(24,24),
+				image : "/images/map_marker_selected.png",
+				iconAnchor : new GPoint(12,12)
+				}
+			),
+			draggable : true
+		}
+	);
+	
+	GEvent.addListener(userHomeMarker,"dragstart",function(latlng){ userHomeMarkerDragStart(latlng); });
+	GEvent.addListener(userHomeMarker,"drag",function(latlng){ userHomeMarkerDrag(latlng); });
+	GEvent.addListener(userHomeMarker,"dragend",function(latlng){ userHomeMarkerDragEnd(latlng); });
+	
+	userHomeMap.setMapType(G_HYBRID_MAP);
+	userHomeMap.addControl(new GSmallMapControl());
+	userHomeMap.addOverlay(userHomeMarker);
+	userHomeMap.setCenter(new GLatLng(<%= @user.home_latitude %>, <%= @user.home_longitude %>),13);
+}
+
+function showUserHomeAddress(address) {
+	if (userHomeGeocoder) {
+		userHomeGeocoder.getLatLng(
+			address,
+			function(point) {
+				if (!point) {
+					alert(address + " not found");
+				} else {
+					userHomeMarker.setLatLng(point);
+					userHomeMarkerDragEnd(point);
+					userHomeMap.setCenter(point, 13);
+					// userHomeMarker.openInfoWindowHtml(address);
+				}
+			}
+		);
+	}
+}
+
+function userHomeMarkerDragStart(latlng) {
+	// $('#user_home_latitude').val(latlng.latitude);
+	// $('#user_home_longitude').val(latlng.latitude);
+}
+function userHomeMarkerDrag(latlng) {
+	$('#user_home_latitude').val(latlng.lat());
+	$('#user_home_longitude').val(latlng.lng());
+}
+function userHomeMarkerDragEnd(latlng) {
+	$('#user_home_latitude').val(latlng.lat());
+	$('#user_home_longitude').val(latlng.lng());
+}
+
+
+
+
+showUserHomeMap();
+</script>

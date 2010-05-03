@@ -1,0 +1,27 @@
+<div class="social_sets">
+	
+	<h3>SocialSets Ordered List</h3>
+
+	LENGTH: <%= @manager.items.length %>
+	<ul>
+	<%-
+				ss_id = nil
+				@manager.items.each do |custom|
+					if ss_id.nil?
+						ss_id = custom.social_set.id
+					end
+					concat "<li> #{custom.social_set.id} => W:#{custom.w.to_i} ___ # of friends:#{custom.f.to_i} </li>"
+					#concat "<li> #{custom.social_set.id} => W:#{(custom.w * 1.00).to_i} ___ wx:#{(custom.getRadiusX)} ___ wt:#{(custom.getRadiusZ)}</li>"
+					#concat "<li> #{custom.social_set.id} => W:#{(custom.w * 0.001)} ___ wx:#{(custom.getRadiusX)} ___ wt:#{(custom.getRadiusZ)}</li>"
+				end
+	%>
+	</ul>
+	
+	<% if not ss_id.nil? %>
+		<script>
+			$("#post_social_set_id").attr("value", "<%= ss_id %>");
+		</script>
+	<% end %>
+
+		
+</div>

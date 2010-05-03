@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta http-equiv="content-script-type" content="text/javascript" />
+		<meta http-equiv="content-style-type" content="text/css" />
+		
+	    <title>Chiive. A Smarter Way to Share Pictures. <%= h(" :: #{yield(:title)}" || "") %></title>
+	
+	    <%= stylesheet_link_tag 'application' %>
+		<%= javascript_include_tag 'jquery-1.3.2.min','application','jquery.edit_in_place' %>
+
+		<%= GMap.header %>
+
+		<% javascript_tag do %>
+		  <%= yield(:jstemplates) %>
+		<% end -%>
+		
+	    <%= yield(:head) %>
+	
+	</head>
+	
+	<body>
+		<div id="wrapper">
+			
+			<div id="header">
+				<div class="container">
+					<h1>
+						<%= link_to "Chiive<span><br />A Smarter Way to Share Pictures</span>", root_path %>
+					</h1>
+					
+					<div id="status">
+					<% if current_user %>
+						Welcome back <%=h current_user.pretty_name %>!<br />
+				        <%= link_to "My Account", edit_user_path(:current) %> |
+				        <%= link_to "Logout", logout_path %>
+				    <% else %>
+				<!--
+						Get involved!<br />
+				        <%= link_to "Register", new_user_path %> |
+				        <%= link_to "Login", login_path %>
+				-->
+				    <% end %>
+					</div>
+					
+					<div id="navigation">
+						<% unless current_user.nil? %>
+						<%= link_to "My Events", user_social_sets_path(current_user) %> |
+						<%= link_to "All Photos", root_path %> |
+						<%= link_to "All Users", users_path %>
+						<% end %>
+					</div>
+				</div>
+			</div>
+			
+			<div id="feedback"><!-- --></div>
+
+			<%- flash.each do |name, msg| -%>
+				<%= content_tag :div, msg, :id => "flash_#{name}", :class => "#{name}" %>
+			<%- end -%>
+
+			<div class="container content">
+      
+			<%= fb_connect_javascript_tag %>
+			<%= init_fb_connect "XFBML", {:js => :jquery} %>
+
+      		<%= yield %>
+
+    		</div>
+		</div>
+
+		<div id="footer">
+			<div class="container">
+				<%= link_to "Chiive", root_path %> | A Smarter Way to Share Pictures
+			</div>
+		</div>
+		
+		<%= yield(:footer) %>
+  </body>
+</html>

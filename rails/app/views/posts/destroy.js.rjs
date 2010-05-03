@@ -1,0 +1,8 @@
+page << "var siblings = $('#post#{params[:id]}_social_set#{params[:social_set_id]}').next();"
+page << "//alert($('#post#{params[:id]}_social_set#{params[:social_set_id]}').next('a.post').attr('id'));"
+page << "if (siblings.length == 0) siblings = $('#post#{params[:id]}_social_set#{params[:social_set_id]}').prev('a.post');"
+page << "if (siblings.length == 0) { window.location = '#{user_social_sets_path(params[:user_id])}';"
+page << "} else {"
+page << "selectPost(siblings);"
+page << "$('#post#{params[:id]}_social_set#{params[:social_set_id]}').remove();"
+page << "}"

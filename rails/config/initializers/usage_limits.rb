@@ -1,0 +1,1 @@
+APP_LIMITS = YAML.load_file(File.join(Rails.root, "config", "usage_limits.yml"))

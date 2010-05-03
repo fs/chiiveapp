@@ -1,0 +1,7 @@
+<%
+concat "{\"#{comment.uuid}\":{"
+concat "\"user_uuid\":\"#{comment.user.uuid}\","
+concat "\"body\":\"#{comment.body}\","
+concat "\"created_at\":#{comment.created_at.to_json}"
+concat "}}"
+%>

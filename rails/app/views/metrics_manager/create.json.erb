@@ -1,0 +1,3 @@
+[<%=
+@manager.items.map { |custom| render "social_sets/social_set", :object => custom.social_set }.join(",") 
+-%>]

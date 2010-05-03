@@ -1,0 +1,56 @@
+<% form_for(@social_set, :html => {:multipart => true}) do |social_set_f| %>
+
+  <%= social_set_f.error_messages %>
+
+	<% social_set_f.fields_for :personal_sets do |personal_set_f| %>
+		<p>
+			<%= personal_set_f.label :title, 'Event Name:' %>
+			<%= personal_set_f.text_field :title %>
+		</p>
+		<p>
+			<%= personal_set_f.datetime_select :time_at %> 
+		</p>
+		<p>
+			<%= personal_set_f.label :latitude %><br>
+			<%= personal_set_f.text_field :latitude, :class => 'latitude' %>
+		</p>
+		<p>
+			<%= personal_set_f.label :longitude %><br>
+			<%= personal_set_f.text_field :longitude, :class => 'longitude' %>
+		</p>
+		<% personal_set_f.fields_for :posts do |post_f| %>
+		
+			<p>
+				<%= post_f.label :title, "Caption" %><br>
+				<%= post_f.text_field :title %>
+			</p>
+			<p>
+				<%= post_f.datetime_select :time_at %>
+			</p>
+			<p>
+				<%= post_f.label :photo %> <br>
+				<%= post_f.file_field :photo %>
+			</p>
+			<p>
+				<%= post_f.label :latitude %><br>
+				<%= post_f.text_field :latitude, :class => 'latitude' %>
+			</p>
+			<p>
+				<%= post_f.label :longitude %><br>
+				<%= post_f.text_field :longitude, :class => 'longitude' %>
+			</p>
+				
+		<% end %>
+	<% end %>
+
+
+
+	<!-- Here we call fields_for on the customer_form builder instance. The block is called for each member of the orders collection. -->  
+	
+	<%= social_set_f.submit %>
+	
+	<!--
+	<hr/>
+	<%= debug @social_set %>
+	-->
+<% end %>

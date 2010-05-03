@@ -1,0 +1,24 @@
+<% title "Login" %>
+
+<% form_for @user_session, :url => user_session_path, :html => { :class => 'user' } do |f| %>
+	<% if current_user %>
+	  <h3>You are currently logged in as <%= current_user.pretty_name %></h3>
+	  <%= fb_profile_pic(facebook_session.user) unless facebook_session.blank? %>
+	<% end %>
+
+  <h2>Log in</h2>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :login, "Username" %><br />
+    <%= f.text_field :login %>
+  </p>
+  <p>
+    <%= f.label :password %><br />
+    <%= f.password_field :password %>
+  </p>
+  <p><%= f.submit "Submit" %></p>
+<% end %>
+
+<br />
+<%= "" #authlogic_facebook_login_button 
+%>

@@ -1,0 +1,559 @@
+
+/* YAHOO RESET
+--------------------------------------------------------------------*/
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td { 
+	margin:				0;
+	padding:			0;
+}
+table {
+	border-collapse:	collapse;
+	border-spacing:		0;
+}
+fieldset,img { 
+	border:				0;
+}
+ol,ul {
+	list-style:			none;
+}
+caption,th {
+	text-align:			left;
+}
+h1,h2,h3,h4,h5,h6 {
+	font-size:			100%;
+	font-weight:		normal;
+}
+q:before,q:after {
+	content:			'';
+}
+abbr,acronym { 
+	border:				0;
+}
+
+ /* GENERAL RULES
+--------------------------------------------------------------------*/
+
+* {
+	/*global font settings*/
+	font-family: 		helvetica, arial, sans-serif;
+}
+
+html {
+	font-size: 			50%; /* Part one of 1em = 10px */
+	height: 			100%;
+}
+
+body {
+	background: 		#fff;
+	padding:			0;
+	margin:				0;
+	height: 			100%;
+	
+	font-size: 			125%; /* Part two of 1em = 10px */
+	
+	text-align: 		center;	/*part 1 of centering hack*/
+}
+
+
+ /* Global Link Settings
+--------------------------------*/
+a {
+	text-decoration:	none;
+	color:				#1ac2cd;
+}
+a:hover, 
+a:active {
+	color: 				#ffdd00;
+}
+
+
+
+ /* Good to have global classes
+--------------------------------*/
+.floatright {
+	float: 				right;
+}
+.floatleft {
+	float: 				left;
+}
+* html .floatright,
+* html .floatleft {
+	display:			inline; /*to avoid IE double margin bug*/
+}
+.alignright {
+	text-align:			right;
+}
+.half {
+	width:				48%;
+}
+.hide {
+	display:			none;
+}
+.nobg {
+	background:			none !important;
+}
+.noborder {
+	border:				0 !important;
+}
+.nomargin {
+	margin:				0 !important; 
+}
+.nomargintop {
+	margin-top:			0 !important; 
+}
+.nomarginbottom {
+	margin-bottom:		0 !important; 
+}
+.uppercase {
+	text-transform:		uppercase;
+}
+.clear {
+	clear:				both;
+}
+.hidden {
+	display:			none;
+}
+
+/* Buttons
+--------------------------------*/
+.button {
+	float:				right;
+}
+
+.button a {
+	display:			block;
+	padding:			4px 20px 3px 18px;
+	background:			#ffdb00;
+	color:				#595959;
+	font-weight:		bold;
+	border:				4px solid #dcdcdc;
+}
+.button a:hover,
+.button a:active {
+	background:			#00d5e2;
+	color:				#fff;
+}
+
+/* Page Centering
+--------------------------------*/
+.container {
+	width:				980px;
+
+	/*part 2 of centering hack*/
+	text-align: 		left;
+	margin: 			0 auto 0 auto;
+	
+	position:			relative;
+}
+* html .container {
+	width:				expression(this.width < 981? "980px" : this.width);
+
+	/*part 2 of centering hack*/
+	text-align: 		left;
+	margin: 			0 auto 0 auto;
+	
+	position:			relative;
+}
+
+ /* Header
+--------------------------------*/
+#header {
+	padding:			18px 0 0 0;
+	height:				57px;
+	background:			#222;
+	color:				#fff;
+	text-align:			left;
+}
+
+#header h1 {
+	height:				36px;
+	font-size:			2.1em;
+	font-weight:		normal;
+	float:				left;
+	background:			transparent url('/images/logo.png') no-repeat left top;
+	padding:			8px 0 0 35px;
+	margin:				0 0 0 35px;
+}
+
+#header h1 a, #header h1 a:active, #header h1 a:hover {
+	color:				#fff;
+}
+
+#header h1 a span {
+	font-size:			.55em;
+	color:				#1ac2cd;
+}
+
+#header #navigation {
+	position: 			absolute;
+	margin:				30px 0 0 25%;
+	width:				50%;
+	text-align:			center;
+	font-size:			1.4em;
+}
+
+#header #status {
+	float:				right;
+	font-size:			1.2em;
+	padding:			17px 0 0 0;
+	line-height:		1.2em;
+	margin:				0 35px 0 0;
+}
+
+#header #status a,
+#header #navigation a {
+	font-weight:		bold;
+	color:				#ffdd00;
+}
+#header #status a:hover, 
+#header #status a:active,
+#header #navigation a:hover,
+#header #navigation a:active {
+	color: 				#1ac2cd;
+}
+
+ /* Footer
+--------------------------------*/
+#footer {
+	height:				75px;
+	background:			#222;
+	color:				#a8a8a8;
+}
+
+#footer .container {
+	padding:			28px 0 0 0;
+	text-align:			center;
+	font-size:			1.2em;
+}
+#footer .container a {
+	color:				#fff;
+	font-weight:		bold;
+}
+
+ /* Components
+--------------------------------*/
+.pagination {
+	font-size:			1.6em;
+	width:				100%;
+	text-align:			center;
+	padding-bottom:		2em;
+}
+.trigger {
+	visibility:			hidden;
+}
+.trigger.visible {
+	visibility:			visible;
+}
+
+ /* Main content
+--------------------------------*/
+#wrapper {
+	min-height: 		100%;
+	height: 			auto !important;
+	height: 			100%;
+	margin: 			0 auto -75px;
+}
+#wrapper .content {
+	padding:			15px 10px 75px 10px;
+	text-align:			left;
+}
+#wrapper .content #anchor {
+	padding:			0 35px 20px 35px;
+}
+#wrapper .content #anchor h5 {
+	font-size:			1.2em;
+	color:				#868686;
+}
+#wrapper .content #anchor h2 {
+	font-size:			1.8em;
+	color:				#000;
+	line-height:		1.3em;
+}
+#wrapper .content #anchor a {
+	font-size:			1.7em;
+}
+
+ /* Users
+--------------------------------*/
+
+form p {
+	margin-bottom: 		1em;
+}
+form h2 {
+	font-size: 			2em;
+	margin-bottom: 		1em;
+}
+form h3 {
+	font-size: 			1.5em;
+	font-weight: 		bold;
+}
+form h4 {
+	font-size: 			1.3em;
+	font-weight: 		bold;
+	margin: 			2em 0 1em 0;
+}
+form label {
+	font-size: 1.4em;
+}
+form input,
+form select,
+form textarea {
+	font-size: 			1.6em;
+	padding: 			2px;
+	margin-top: 		.2em;
+}
+form fieldset {
+	float: 				left;
+	margin:				2em 2em 0 0;
+}
+form fieldset legend {
+	font-size:			1.5em;
+	font-weight:		bold;
+	margin:				-2em 0 .5em 0;
+}
+form a.cancel {
+	font-size:			1.4em;
+}
+div.user {
+	padding: 			0 0 2em 0;
+}
+div.user h3 {
+	font-size: 			2em;
+}
+div.user h3 span {
+	font-size: 			.6em;
+}
+div.user h4 {
+	font-size: 			1.3em;
+}
+div.user p {
+	font-size: 			1.2em;
+}
+div.user .avatar {
+	float:				left;
+	margin:				0 .5em .5em 0;
+	width:				50px;
+	height:				45px;
+}
+div.friendships {
+	float: 				right;
+}
+div.friendships ul {
+	display:			block;
+	margin: 			.25em 0 2em 0;
+}
+div.friendships ul li {
+	font-size:			1.4em;
+}
+ /* PersonalSets
+--------------------------------*/
+#new_post_form {
+	display:			none;
+	padding:			0;
+}
+.map {
+	float:				right;
+	width:				265px;
+	height:				245px;
+	background:			#ccc;
+	overflow:			hidden;
+}
+
+.personal_set {
+	background:			#f4f4f4;
+	padding:			1px;
+	border:				1px solid #e8e8e8;
+	margin:				0 0 30px 0;
+}
+.personal_set .head {
+	background:			#e8e8e8;
+	padding:			8px 35px;
+	font-size:			1.2em;
+}
+.personal_set .head h3 {
+	font-size:			2em;
+	font-weight:		bold;
+	color:				#6e6e6e;
+}
+.personal_set .head h3 a,
+.personal_set .head h3 .eip-wait {
+	font-size:			.5em;
+	font-weight:		normal;
+}
+.personal_set .head h3 input.eip-field {
+	font-size:			1em;
+	font-weight:		bold;
+}
+.personal_set .head h3 input.eip-save {
+	font-size:			2em;
+	margin-left:		5px;
+}
+.personal_set .head h3 span.eip-or {
+	margin:				0 5px;
+}
+.personal_set .head .eip-form-actions {
+	font-size:			.5em;
+	font-weight:		normal;
+	display: 			inline;
+}
+.personal_set .head .eip-form-actions a {
+	font-size:			1em;
+}
+.personal_set .head .navigation {
+	float:				right;
+	font-size:			1.2em;
+}
+.personal_set .body {
+	margin:				10px;
+	padding:			15px 0;
+	background:			#fff;
+}
+.personal_set .body .related {
+	float:				right;
+}
+.personal_set .body .related .map {
+	width:				265px;
+	height:				245px;
+	background:			#ccc;
+	text-align:			center;
+}
+.personal_set .body .related .map a.show {
+	display:			block;
+	width:				100%;
+	line-height:		240px;
+	padding-bottom:		5px;
+	font-size:			2em;
+	vertical-align:		bottom;
+}
+.personal_set .body .related ul.friends {
+	display:			block;
+	padding:			1em;
+	clear:				both;
+}
+.personal_set .body .related .friends li {
+	font-size:			1.4em;
+	line-height:		1.4em;
+}
+.personal_set .body .related .friends li input {
+	margin-right:		5px;
+}
+.personal_set .body .photos {
+	float: 				left;
+	width: 				480px;
+	height: 			100%;
+	padding: 			10px;
+}
+.personal_set .body .photos .main {
+	background: 		#000;
+	text-align: 		center;
+	height:				480px;
+	width:				480px;
+	display: 			table;
+	#position: 			relative; 
+	overflow: 			hidden;
+}
+.personal_set .body .photos .main {
+	#position: 			absolute;
+	#top: 				50%;
+	display:			table-cell;
+	vertical-align: 	middle;
+}
+.personal_set .body .photos .main img {
+	#position: relative;
+	#top: -50%;
+}
+.personal_set .body .details {
+	padding:			10px;
+}
+.personal_set .body .details .info {
+	margin-bottom:		10px;
+}
+.personal_set .body .details h3 {
+	font-size:			1.8em;
+	margin:				3em 0 .5em 0;
+}
+.personal_set .body .details p {
+	font-size:			1.3em;
+	margin-bottom: 		1em;
+}
+.personal_set .body .details p.meta {
+	color:				#999;
+}
+.personal_set .body .details .admin a.delete {
+	width: 				42px;
+	height:				28px;
+	overflow:			hidden;
+	background-image:	url("/images/icon_delete.gif");
+	text-indent:		-9999px;
+	float:				left;
+}
+.personal_set .body .thumbs {
+	width:				480px;
+	padding: 			12px 0 12px 1px;
+}
+.personal_set .body .thumbs a {
+	float:				left;
+	border:				4px solid #d7d6d7;
+	margin:				-4px -4px 0 0;
+	position:			relative;
+	z-index:			10;
+}
+.personal_set .body .thumbs a.selected {
+	margin:				-6px -6px -2px -2px;
+	border:				6px solid #00ddff;
+	z-index:			100;
+}
+.personal_set .body .thumbs a:hover,
+.personal_set .body .thumbs a:active,
+.personal_set .body .thumbs a.active {
+	margin:				-6px -6px -2px -2px;
+	border:				6px solid #ffdd00;
+	z-index:			100;
+}
+.personal_set .body .thumbs a img {
+	width:				75px;
+	height:				75px;
+}
+
+/* temporal FORM FIELD ERRORS */
+.fieldWithErrors {
+	color: #990000;
+	font-weight: bold;
+}
+.fieldWithErrors input{
+	border-color: #ff0000;
+}
+
+/* COMMENTS */
+.comments {
+	padding:25px;
+}
+
+.comments form {
+	margin-top: 20px;
+}
+.comments form label, .comments form input, .comments form textarea {
+	font-size:100%;
+}
+.comments form input, .comments form textarea {
+	width: 300px;
+}
+.comments form textarea {
+	height: 70px;
+}
+
+.comments_li {
+	padding:10px;
+	margin-top:10px;
+}
+.comment_owned {
+	background-color: #ddd;
+}
+.comments .comment_title {
+	font-size:1.5em;
+}
+.comments .comment_meta {
+	color:#666;
+}
+.comments .comment_body {
+	font-size:1.3em;
+}

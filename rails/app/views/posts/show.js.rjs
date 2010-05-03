@@ -1,0 +1,11 @@
+# 4 GROUPS
+#personal_setId = params[:personal_set_id].blank? ? @post.personal_set_id : params[:personal_set_id]
+#page << "$('div#personal_set#{personal_setId} div.photos div.main img').attr('src', '/system/photos/#{@post.id}/iphone/#{@post.photo_file_name}');"
+#page << "$('div#personal_set#{personal_setId} div.details').html(\"#{escape_javascript(render :partial => 'posts/details', :locals => { :post => @post} )}\");"
+#page << "$('.trigger').addClass('visible');"
+
+# 4 SSETS
+social_setId = params[:social_set_id].blank? ? @post.personal_set.social_set_id : params[:social_set_id]
+page << "$('div#social_set#{social_setId} div.photos div.main img').attr('src', '#{@post.photo.url("iphone")}');"
+page << "$('div#social_set#{social_setId} div.details').html(\"#{escape_javascript(render :partial => 'posts/details', :locals => { :post => @post} )}\");"
+page << "$('.trigger').addClass('visible');"

@@ -1,0 +1,35 @@
+<%
+posts_limit ||= 1 # show only a single post by default
+users_limit ||= 1 # show only the owner by default
+
+concat "{\"event\":{"
+concat "\"uuid\":\"#{social_set.uuid}\","
+concat "\"title\":\"#{escape_json(social_set.title)}\","
+concat "\"time_at\":#{social_set.time_at.to_json},"
+concat "\"posts_count\":#{social_set.posts.size},"
+# concat "\"personal_sets_count\":#{social_set.personal_sets.size},"
+if (posts_limit == 1 && social_set.posts.size > 0)
+	concat "\"post\":"
+	concat render "posts/post", :object => social_set.posts.last
+	concat ","
+else
+	concat "\"posts\":["
+	concat social_set.posts.map { |post| render "posts/post", :object => post }.join(",")
+	concat "],"
+end
+# if we're only showing the limited view, only provide the owner
+if (users_limit == 1)
+	concat "\"owner\":"
+	concat render "users/user", :object => social_set.default_user
+	concat ","
+	
+# if we're only showing everything, show the complete user's list and the owner's ID
+else
+	concat "\"users\":["
+	concat social_set.users.map { |user| render "users/user", :object => user }.join(",")
+	concat "],"
+	concat "\"owner_uuid\":\"#{social_set.default_user.uuid}\","
+end
+concat "\"users_count\":#{social_set.users.size}"
+concat "}}"
+%>

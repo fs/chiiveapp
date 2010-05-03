@@ -1,0 +1,46 @@
+<%
+show_social_sets ||= false
+show_private_info ||= false
+show_frienship_info = current_user && user != current_user
+
+concat "{\"user\":{"
+concat "\"uuid\":\"#{user.uuid}\","
+concat "\"name\":\"#{escape_json(user.pretty_name)}\","
+concat "\"first_name\":\"#{escape_json(user.first_name)}\","
+concat "\"last_name\":\"#{escape_json(user.last_name)}\","
+avatar_path = user.avatar_image.file? ? "http://#{request.host_with_port}#{user.avatar_image.url('small')}" : user.avatar
+concat "\"avatar\":\"#{avatar_path}\","
+
+if (show_social_sets)
+	posts_limit ||= 1 # show only a single post by default
+	users_limit ||= 0 # show all the users by default
+	
+	concat "\"events\":["
+	concat user.social_sets.map { |social_set| 
+		render :partial => social_set, :locals => { :posts_limit => posts_limit, :users_limit => users_limit }
+	}.join(",")
+	concat "],"
+end
+
+if (show_private_info)
+	concat "\"single_access_token\":\"#{user.single_access_token}\","
+	concat "\"email\":\"#{escape_json(user.email)}\","
+	concat "\"facebook_uid\":#{user.facebook_uid ? user.facebook_uid : 0},"
+end
+
+if (show_frienship_info)
+	# check both sides of the relationship
+	friendship = current_user.get_friendship_from(user)
+	fandom = user.get_friendship_from(current_user)
+	
+	friendship_id = !friendship ? 0 : friendship.id
+	fandom_id = !fandom ? 0 : fandom.id
+	
+	concat "\"friendship_id\":#{friendship_id},"
+	concat "\"fandom_id\":#{fandom_id},"
+end
+concat "\"friends_count\":#{user.mutual_friends.length},"
+concat "\"friend_requests_count\":#{user.fans_of_me.length},"
+concat "\"personal_sets_count\":#{user.personal_sets_count}"
+concat "}}"
+%>
