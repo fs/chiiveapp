@@ -13,37 +13,9 @@
 </div>
 
 <div id="photos">
-	<div id="ajaxloader">&nbsp;</div>	
-	<div class="photoscontent">
-
-		<div class="clearfix">
-		  <% @photos.each do |photo| %>
-		    <%= link_to image_tag(photo.thumb_url), photo %>
-		  <% end %>
-		</div>
-
-    <ul id="pagination">
-      <li class="prev">
-        <% if @photos.current_page > 1 %>
-          <%= link_to "&laquo; Previous", photos_path(:page => @photos.current_page - 1) %>
-        <% else %>
-          &laquo; Previous
-        <% end %>
-      </li>
-      <% @photos.total_pages.times do |i| %>
-        <li<% if i + 1 == @photos.current_page %> class="active"<% end %>>
-          <%= link_to i + 1, photos_path(:page => i + 1) %>
-        </li>
-      <% end %>
-      <li class="next">
-        <% if @photos.current_page < @photos.total_pages %>
-          <%= link_to "Next &raquo;", photos_path(:page => @photos.current_page + 1) %>
-        <% else %>
-          Next &raquo;
-        <% end %>
-      </li>
-    </ul>
-    
+	<div id="ajaxloader" style="display: none;">&nbsp;</div>	
+	<div id="photos_container" class="photoscontent">
+		<%= render 'photos' %>
 	</div>
 	
 </div><!-- /photos -->	

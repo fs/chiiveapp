@@ -1,0 +1,37 @@
+<div class="clearfix">
+  <% @photos.each do |photo| %>
+    <%= link_to image_tag(photo.thumb_url), photo %>
+  <% end %>
+</div>
+
+<%= custom_will_paginate(@photos) %>
+
+<script type="text/javascript" charset="utf-8">  
+  foreach(document.getElementById('pagination'), 'a', function(e) {
+    e.addEventListener('click', function() {
+      if(ajax != null) {
+        ajax.abort();
+      }
+      
+      var loader = document.getElementById('ajaxloader');
+      var container = document.getElementById('photos_container');
+      loader.setStyle('height', container.getClientHeight() + 'px');
+      Animation(loader).to('opacity', 0.8).from(0).show().go();
+      
+      ajax = new Ajax();
+      ajax.responseType = Ajax.FBML;
+      ajax.ondone = function(data) {
+        container.setInnerFBML(data);
+        Animation(loader).hide().to('opacity', 0).from(0.8).go();
+      };
+      ajax.onerror = function() {};
+      
+      var url = e.getHref().replace(new RegExp("http://apps.facebook.com\/[^\/]*"), "");
+      url = "http://<%= request.host %>:<%= request.port %>" + url;
+      ajax.requireLogin = 1;
+      ajax.post(url, {'_method' : 'GET'});
+      
+      return false;
+    });
+  });
+</script>

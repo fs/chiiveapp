@@ -232,7 +232,6 @@ a:hover {
 	height:					500px;
 	background: 			#fff url(http://chiiveapp.demo.flatsourcing.com/images/interface/ajaxloader.gif) no-repeat 50% 50%;
 	z-index:				1000;
-	display:				none;
 } 
 
 #maincontent #photos img {
@@ -364,7 +363,6 @@ a:hover {
 	width:					768px;
 	background: 			#fff url(http://chiiveapp.demo.flatsourcing.com/images/interface/ajaxloader.gif) no-repeat 50% 250px;
 	z-index:				1000;
-	display:				none;
 } 
 
 

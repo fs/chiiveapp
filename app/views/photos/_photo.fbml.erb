@@ -1,0 +1,61 @@
+<div id="photo">
+	<div class="navigation">
+	  <% if @photo.previous_photo %>
+	    <%= link_to 'Previous', @photo.previous_photo %>
+	  <% else %>
+	    Previous
+	  <% end %>
+	  <span><%= @photo.id %> of <%= Photo.count %></span>
+	  <% if @photo.next_photo %>
+	    <%= link_to 'Next', @photo.next_photo %>
+	  <% else %>
+	    Next
+	  <% end %>
+	</div>
+	<%= image_tag(@photo.image_url) %>
+</div>
+
+<div id="photoby">
+  <%= fb_profile_pic(@photo.user.facebook_uid || '100000066328092', :width => 35, :height => 35) %>
+
+	<h3>Photo By: <strong><%= user_name(@photo.user) %></strong></h3>
+	<p>Check out who just arrived!</p>
+	<p class="info">Posted on <%= @photo.created_at.strftime('%d/%m/%Y') %></p>
+
+	<div class="share">
+	  <%= fb_share_button photo_url(@photo) %>
+	  <fb:iframe src="http://www.facebook.com/plugins/like.php?href=<%= CGI.escape photo_url(@photo) %>&amp;layout=button_count&amp;show_faces=true&amp;width=150&amp;action=like&amp;colorscheme=light" scrolling="no" frameborder="0" allowTransparency="true" style="border:none; overflow:hidden; width:150px; height: 30px;"></iframe>
+	</div>
+</div>
+
+<%= render 'layouts/comments.fbml', :title => "chiiveapp_photo_#{@photo.id}" %>
+
+<script type="text/javascript" charset="utf-8">  
+  foreach(document.getElementById('photo'), 'a', function(e) {
+    e.addEventListener('click', function() {
+      if(ajax != null) {
+        ajax.abort();
+      }
+      
+      var loader = document.getElementById('ajaxloader');
+      var container = document.getElementById('photo_container');
+      loader.setStyle('height', container.getClientHeight() + 'px');
+      Animation(loader).to('opacity', 0.8).from(0).show().go();
+      
+      ajax = new Ajax();
+      ajax.responseType = Ajax.FBML;
+      ajax.ondone = function(data) {
+        container.setInnerFBML(data);
+        Animation(loader).hide().to('opacity', 0).from(0.8).go();
+      };
+      ajax.onerror = function() {};
+      
+      var url = e.getHref().replace(new RegExp("http://apps.facebook.com\/[^\/]*"), "");
+      url = "http://<%= request.host %>:<%= request.port %>" + url;
+      ajax.requireLogin = 1;
+      ajax.post(url, {'_method' : 'GET'});
+      
+      return false;
+    });
+  });
+</script>
