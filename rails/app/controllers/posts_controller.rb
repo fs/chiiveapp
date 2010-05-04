@@ -139,12 +139,10 @@ class PostsController < ApplicationController
       social_set = SocialSet.find_by_uuid(params[:social_set_id])
     end
     
-    assign_post_social_set(@post, social_set)
-    
     @post.time_at = Time.new if @post.time_at.blank?
     
     respond_to do |format|
-      if @post.save
+      if assign_post_social_set(@post, social_set)
         # flash[:notice] = 'Successfully created post.'
         format.html { redirect_to user_social_set_path(@post.user, @post.social_set) }
         format.xml  { render :xml => @post.to_xml(:except => [:address_id]), :status => :created }
@@ -237,15 +235,17 @@ private
     
     # find the post's owner's personal set for the new social set
     if (post.social_set.nil? or post.social_set != social_set)
-      post.personal_set = social_set.personal_sets.find_by_user_id(post.user.id)
-      # post.personal_set = PersonalSet.find(:first, 
-      #                       :conditions => ["user_id = :user_id and social_set_id = :social_set_id", 
-      #                         {:user_id => post.user_id, :social_set_id => social_set.id}])
+      personal_set = social_set.personal_sets.find_by_user_id(post.user.id)
       
-      # if the post's owner did not yet have a personal set, create one
-      if post.personal_set.nil?
-        post.build_personal_set
-        post.personal_set.social_set = social_set
+      # if the post's owner did not yet have a personal set in the social set, fail
+      if (personal_set.nil?)
+        return false
+        # post.build_personal_set
+        # return social_set.personal_sets << post.personal_set
+      
+      # if we have a personal set, insert the post with an auto-save and return the result
+      else
+        return personal_set.posts << post
       end
     end
   end

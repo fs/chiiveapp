@@ -39,7 +39,7 @@ class MetricsManager
     longitude_range = 0.02 # let's give about a mile range at 45 degrees lat
     
     # hours * minutes * seconds
-    time_range = 6 * 6 * 60 * 60
+    time_range = 6 * 60 * 60
     
     ########################
     # Selection
