@@ -13,7 +13,7 @@ concat "\"avatar\":\"#{avatar_path}\","
 
 if (show_social_sets)
 	posts_limit ||= 1 # show only a single post by default
-	users_limit ||= 0 # show all the users by default
+	users_limit ||= 1 # show only the owner by default
 	
 	concat "\"events\":["
 	concat user.social_sets.map { |social_set| 

@@ -8,14 +8,22 @@ class RemoveSetMetrics < ActiveRecord::Migration
     add_column :personal_sets, :latitude,:decimal, :precision => 15, :scale => 10
     add_column :personal_sets, :longitude, :decimal, :precision => 15, :scale => 10
     
+    # Move the metrics values onto the social sets
     sql = "UPDATE social_sets s, metrics_social_set_metrics m "
     sql += "SET s.time_at = m.time_at, s.latitude = m.latitude, s.longitude = m.longitude "
     sql += "WHERE s.metrics_id = m.id "
     SocialSet.connection.execute(sql)
     
+    # Move the metrics values onto the personal sets
     sql = "UPDATE personal_sets p, metrics_set_metrics m "
     sql += "SET p.time_at = m.time_at, p.latitude = m.latitude, p.longitude = m.longitude "
     sql += "WHERE p.metrics_id = m.id "
+    PersonalSet.connection.execute(sql)
+    
+    # Inherit any missing personal set data from the social sets
+    sql = "UPDATE personal_sets p, social_sets s "
+    sql += "SET p.time_at = s.time_at, p.latitude = s.latitude, p.longitude = s.longitude "
+    sql += "WHERE p.social_set_id = s.id AND (p.time_at IS NULL OR p.latitude IS NULL OR p.longitude IS NULL) "
     PersonalSet.connection.execute(sql)
     
     remove_column :social_sets, :metrics_id

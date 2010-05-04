@@ -6,13 +6,29 @@ class MetricsManager
   attr_accessor :limit
   
   def initialize(params)
-    # Grab the values
+    # parse the time value to use in our bounding box
     time_value = Time.parse(params[:time_at]) # format: ~= "2010/03/02 15:13:00 -0800" or "2010/03/02 15:13", etc
-    latitude_value = params[:latitude].to_f()
-    longitude_value = params[:longitude].to_f()
     
     # max number of suggestions
     params[:limit] = 5 if params[:limit].blank?
+    
+    ########################
+    # Scoring 
+    ########################
+    
+    # max of 3 * score_per_distance, since we have lat, lng, and time
+    score_per_distance = 1 
+    
+    # number of points for each friend at an event
+    score_per_friend = 2 
+    
+    # number of points if you're at the event
+    score_for_user = 5 
+    
+    
+    ########################
+    # Bounding Box
+    ########################
     
     # a degree of latitude is ~69 miles
     latitude_range = 0.014 # let's give about a mile range
@@ -23,22 +39,47 @@ class MetricsManager
     longitude_range = 0.02 # let's give about a mile range at 45 degrees lat
     
     # hours * minutes * seconds
-    time_range = 6 * 60 * 60
+    time_range = 6 * 6 * 60 * 60
+    
+    ########################
+    # Selection
+    ########################
     
     # create the sql for the select
     # we create a "score" for each social set based on how far away, when, and how many friends are at the event
     sql_select = "SELECT *, "
-    sql_select += "(1 - #{latitude_range} * ABS(s.latitude - :latitude)) + " # a max of 1 point for latitude difference 
-    sql_select += "(1 - #{longitude_range} * ABS(s.longitude - :longitude)) + " # a max of 1 point for longitude difference
-    sql_select += "(1 - ABS(TIMESTAMPDIFF(SECOND, s.time_at, :time_at)) / #{time_range}) + " # a max of 1 point for time difference
-    sql_select += "(SELECT  COUNT(*) FROM personal_sets as p, friendships as f "
-      sql_select += "WHERE s.id = p.social_set_id AND f.user_id = p.user_id AND f.friend_id = :user_id) " # 1 point for every friend at the event"
-    sql_select += "AS score "
+    
+    # Distance score: {score_per_distance} * distance in time and geography from the event relative to bounding size
+    sql_select += "(#{score_per_distance} - ABS(s.latitude - :latitude) / #{latitude_range}) + "
+    sql_select += "(#{score_per_distance} - ABS(s.longitude - :longitude) / #{longitude_range}) + "
+    sql_select += "(#{score_per_distance} - ABS(TIMESTAMPDIFF(SECOND, s.time_at, :time_at)) / #{time_range}) as score_location, "
+    
+    # Friendships score: {score_per_friend} * number of friends at the event
+    sql_select += "(SELECT COUNT(*) FROM personal_sets as p, friendships as f "
+      sql_select += "WHERE (s.id = p.social_set_id AND f.user_id = p.user_id AND f.friend_id = :user_id) "
+      sql_select += ") * #{score_per_friend} AS score_friends, "
+    
+    # User score: {score_for_user} points if the user is there
+    sql_select += "(SELECT COUNT(*) FROM personal_sets as p WHERE p.social_set_id = s.id AND p.user_id = :user_id) * #{score_for_user} as score_user "
+    
+    # we're looking fror social sets
     sql_select += "FROM social_sets as s "
+    
+    # stay within a time and geography bounding box
     sql_select += "WHERE s.latitude > (:latitude - #{latitude_range}) AND s.latitude < (:latitude + #{latitude_range}) "
     sql_select += "AND s.longitude > (:longitude - #{longitude_range}) AND s.longitude < (:longitude + #{longitude_range}) "
     sql_select += "AND s.time_at > '#{(time_value - time_range).to_s(:db)}' AND s.time_at < '#{(time_value + time_range).to_s(:db)}' "
-    sql_select += "ORDER BY score "
+    
+    # make sure the event is either public, or the user has friends there, or the user is attending
+    sql_select += "AND ( "
+      sql_select += "(SELECT public FROM personal_sets as p WHERE s.id = p.social_set_id ORDER BY order_social_set ASC LIMIT 1) = 1 "
+      sql_select += "OR (SELECT COUNT(*) FROM personal_sets as p, friendships as f "
+        sql_select += "WHERE (s.id = p.social_set_id AND f.user_id = p.user_id AND f.friend_id = :user_id) "
+      sql_select += "OR (s.id = p.social_set_id AND p.user_id = :user_id)) > 0 "
+    sql_select += ") "
+    
+    # order by our score and set the max number to return
+    sql_select += "ORDER BY score_location + score_friends + score_user DESC "
     sql_select += "LIMIT :limit "
     
     # search for social sets within the ranges
@@ -46,17 +87,3 @@ class MetricsManager
     
   end
 end
-
-# SELECT *, (1 - 0.014 * ABS(s.latitude - 37.331689)) +
-# (1 - 0.02 * ABS(s.longitude - -122.030731)) +
-# (1 - ABS(TIMESTAMPDIFF(SECOND, s.time_at, '2010-05-04 03:11:16')) / (6 * 60 * 60)) +
-# (SELECT  COUNT(*) FROM personal_sets as p, friendships as f 
-#    WHERE s.id = p.social_set_id AND f.user_id = p.user_id AND f.friend_id = 2)
-# as w
-# FROM `social_sets` as s
-# WHERE s.time_at > '2010-05-03 20:11:16' AND s.time_at < '2010-05-04 08:11:16' 
-# AND s.latitude > 37.311689 AND s.latitude < 37.351689 
-# AND s.longitude > -122.050731 AND s.longitude < -122.010731
-
-
-#"latitude"=>"37.331689", "time_at"=>"2010-05-04T02:11:16Z", "longitude"=>"-122.030731"
