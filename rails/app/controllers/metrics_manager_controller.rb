@@ -7,18 +7,13 @@ class MetricsManagerController < ApplicationController
   
   def create
 
-    params[:metrics_manager][:user_id] = params[:user_id]
+    params[:metrics_manager][:user_id] = current_user.id
     
     @manager = MetricsManager.new(params[:metrics_manager])
    
     respond_to do |format|
-      format.html {render :layout => false } # index.html.erb
-      #format.xml  { render :xml => @posts.to_xml(:except => [:address_id]) }
-      format.json # index.html.erb
-      #format.js 
+      format.html { render :layout => false }
+      format.json
     end
-    
-  end
-  
-  
+  end  
 end
