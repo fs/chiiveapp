@@ -12,15 +12,9 @@ class UsersController < ApplicationController
       like_clause = params[:q]+"%"
       @users = User.find(:all, :conditions => [ "login like ? OR first_name like ? OR last_name like ?", like_clause, like_clause, like_clause ] )
     end
-    @users.each do |user|
-      if user.avatar.blank? and !user.facebook_uid.blank?
-        fb_user = Facebooker::User.new(user.facebook_uid)
-        user.update_attributes({:avatar => fb_user.pic_square})
-      end
-    end
     
     respond_to do |format|
-      format.html # index.html.erb
+      format.html
       format.xml  { render :xml => @posts.to_xml(:except => [:address_id]) }
       format.json { 
         if params[:client_type].blank? and params[:client_version].blank?
@@ -34,14 +28,6 @@ class UsersController < ApplicationController
   end
   
   def show
-    # select = "id, login, name, email, updated_at, created_at"
-    # @user = User.find(params[:id], :select  => select)
-    # respond_to do |format|
-    #   format.html # show.html.erb
-    #   format.xml  { render :xml => @user }
-    #   format.json { render :json => @user }
-    # end
-    
     if (params[:id].to_s == params[:id].to_i.to_s)
       @user = User.find(params[:id])
     else

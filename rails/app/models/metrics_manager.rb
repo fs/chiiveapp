@@ -70,12 +70,14 @@ class MetricsManager
     sql_select += "AND s.longitude > (:longitude - #{longitude_range}) AND s.longitude < (:longitude + #{longitude_range}) "
     sql_select += "AND s.time_at > '#{(time_value - time_range).to_s(:db)}' AND s.time_at < '#{(time_value + time_range).to_s(:db)}' "
     
-    # make sure the event is either public, or the user has friends there, or the user is attending
+    # make sure the event is accessibe to the user
     sql_select += "AND ( "
+      # event is public
       sql_select += "(SELECT public FROM personal_sets as p WHERE s.id = p.social_set_id ORDER BY order_social_set ASC LIMIT 1) = 1 "
-      sql_select += "OR (SELECT COUNT(*) FROM personal_sets as p, friendships as f "
-        sql_select += "WHERE (s.id = p.social_set_id AND f.user_id = p.user_id AND f.friend_id = :user_id) "
-      sql_select += "OR (s.id = p.social_set_id AND p.user_id = :user_id)) > 0 "
+      # event has user's friends present
+  	  sql_select += "OR (SELECT COUNT(*) FROM personal_sets as p, friendships as f WHERE s.id = p.social_set_id AND f.user_id = p.user_id AND f.friend_id = :user_id) > 0 "
+      # event is already one of the user's events
+  	  sql_select += "OR (SELECT COUNT(*) FROM personal_sets as p WHERE s.id = p.social_set_id AND p.user_id = :user_id) > 0 "
     sql_select += ") "
     
     # order by our score and set the max number to return
