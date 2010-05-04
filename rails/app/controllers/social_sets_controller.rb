@@ -279,7 +279,7 @@ class SocialSetsController < ApplicationController
             @social_set = nil
           end
         end
-        format.html { redirect_to (@social_set.nil?) ? 
+        format.html { redirect_to(@social_set.nil?) ? 
                         user_social_sets_path(current_user) : 
                         user_social_set_path(@social_set.default_personal_set.user, @social_set)
                     }

@@ -8,7 +8,6 @@ class SocialSetTest < ActiveSupport::TestCase
   
   def test_should_be_valid
     social_set = Factory.build(:social_set)
-    social_set.personal_sets << Factory.build(:personal_set)
     assert social_set.valid?
   end
   
@@ -19,7 +18,7 @@ class SocialSetTest < ActiveSupport::TestCase
   context "When creating new social_set" do
     
     setup do
-     @social_set = Factory.build(:social_set)
+     @social_set = Factory.build(:social_set, :personal_sets => [])
     end
     
     should "fail without a personal set" do
@@ -68,9 +67,9 @@ class SocialSetTest < ActiveSupport::TestCase
   context "When adding posts to user's existing event" do
     
     setup do
-      @social_set = Factory.build(:social_set)
+      @social_set = Factory.build(:social_set, :personal_sets => [])
       @social_set.personal_sets << Factory.build(:personal_set)
-      @social_set.save()
+      @social_set.save
       @social_set.reload
       
       @latitude = @social_set.latitude
@@ -137,7 +136,7 @@ class SocialSetTest < ActiveSupport::TestCase
       assert_equal (@post1.longitude + @post2.longitude) / 2, @social_set.longitude
       assert_equal (@post1.time_at.to_i + @post2.time_at.to_i) / 2, @social_set.time_at.to_i
     end
-
+      
     should "update metrics to incrementally with third post" do
       @social_set.default_personal_set.posts << @post1
       @social_set.default_personal_set.posts << @post2
@@ -148,7 +147,7 @@ class SocialSetTest < ActiveSupport::TestCase
       assert_equal (@post1.longitude + @post2.longitude + @post3.longitude) / 3, @social_set.longitude
       assert_equal (@post1.time_at.to_i + @post2.time_at.to_i + @post3.time_at.to_i) / 3, @social_set.time_at.to_i
     end
-
+      
   end
   
   ######################################################  

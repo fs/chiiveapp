@@ -17,6 +17,11 @@ test:
     path: ":rails_root/public/system/:attachment/:uuid/:style/:filename"
     url: "/system/:attachment/:uuid/:style/:filename"
 
+cucumber:
+    storage: 'filesystem' #:filesystem
+    path: ":rails_root/public/system/:attachment/:uuid/:style/:filename"
+    url: "/system/:attachment/:uuid/:style/:filename"
+
 #--------------------------------------------------------------------------
 
 # staging:

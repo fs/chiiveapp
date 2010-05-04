@@ -15,7 +15,7 @@ Factory.define :personal_set do |f|
 end
 
 Factory.define :social_set do |f|
-  # f.association :personal_sets
+  f.personal_sets {|personal_sets| [personal_sets.association(:personal_set)]}
 end
 
 Factory.define :post do |f|
