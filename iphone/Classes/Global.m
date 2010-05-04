@@ -8,7 +8,8 @@
 
 
 #if (TARGET_IPHONE_SIMULATOR)
-static NSString* kSitePath = @"http://ec2-174-129-74-75.compute-1.amazonaws.com/";
+//static NSString* kSitePath = @"http://ec2-174-129-74-75.compute-1.amazonaws.com/";
+static NSString* kSitePath = @"http://localhost:3000/";
 static NSString* kFbConnectApiKey = @"81939b58bf646c63622e61f8a5e35cce";
 #else
 static NSString* kSitePath = @"http://chiive.com/";

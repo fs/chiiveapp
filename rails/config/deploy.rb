@@ -1,18 +1,23 @@
 # The name of your application
 set :application, "spyglass"
 
-# Your svn / git login name
-set :scm_username, Proc.new { CLI.password_prompt "SVN Username: "}
-set :scm_password, Proc.new { CLI.password_prompt "SVN Password: "}
-
-# Your repository type, by default we use subversion. 
+# Repository type
+default_run_options[:pty] = true
 set :scm, :git
+ssh_options[:forward_agent] = true
 
 # the url for your repository
-set :repository,  "https://dev.17feet.com/svn/#{application}/trunk/rails"
+set :repository,  "git@github.com:arrel/Qamio.git"
+set :branch, "master"
+set :site_root, "rails"
+
+# Your svn / git login name
+# set :scm_passphrase, Proc.new { CLI.password_prompt "Git Passphrase: "}
+set :scm_user, Proc.new { CLI.password_prompt "Git User: "}
 
 # use update of a cached copy of the svn rather than a full checkout every time
-set :deploy_via, :remote_cache
+# set :deploy_via, :remote_cache
+set :deploy_subdir, "rails"
 set :copy_exclude, [".DS_Store"]
 set :repository_cache, "cached-copy"
 
