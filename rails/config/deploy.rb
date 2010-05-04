@@ -1,5 +1,5 @@
 # The name of your application
-set :application, "spyglass"
+set :application, "qamio"
 
 # Repository type
 default_run_options[:pty] = true
@@ -7,7 +7,7 @@ set :scm, :git
 ssh_options[:forward_agent] = true
 
 # the url for your repository
-set :repository,  "git@github.com:arrel/Qamio.git"
+set :repository,  "git@github.com:arrel/qamio.git"
 set :branch, "master"
 set :site_root, "rails"
 
