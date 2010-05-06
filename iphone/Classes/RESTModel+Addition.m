@@ -78,7 +78,6 @@
 		if (!child)
 		{
 			child = (RESTObject *)[ManagedObjectsController objectWithClass:self.childClass];
-			child.hasSynced = YES;
 			// insert at the back of the line
 			[self insertChild:child atIndex:-1];
 		}

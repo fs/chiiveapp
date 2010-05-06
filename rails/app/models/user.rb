@@ -114,22 +114,24 @@ class User < ActiveRecord::Base
     end
   end
   
-  #Take the data returned from facebook and create a new user from it.
-  #We don't get the email from Facebook and because a facebooker can only login through Connect we just generate a unique login name for them.
-  #If you were using username to display to people you might want to get them to select one after registering through Facebook Connect
+  # Take the data returned from facebook and create a new user from it.
+  # We don't get the email from Facebook and because a facebooker can only login through Connect we just generate a unique login name for them.
   def self.create_from_fb_connect(fb_user)
-    new_facebooker = User.new(:login => "facebooker_#{fb_user.uid}", :password => "", :email => "")
+    
+    # create a login based on their fb uid and a random password
+    new_facebooker = User.new(:login => "facebooker_#{fb_user.uid}", :password => UUIDTools::UUID.timestamp_create().to_s, :email => "")
     new_facebooker.first_name = fb_user.first_name
     new_facebooker.last_name = fb_user.last_name
     new_facebooker.name = fb_user.name
+    
     new_facebooker.facebook_uid = fb_user.uid.to_i
-    new_facebooker.email_hash = fb_user.email_hashes
+    new_facebooker.email_hash = fb_user.email_hashes[0] unless fb_user.email_hashes.blank?
     
     # Validate now, which assigns default values like the auth_logic single_access_token
     new_facebooker.valid?
     
-    # we are invalid, since there is no email or password, but we will ask for those later.
-    # for now, save without validation
+    # we are invalid, since there is no email, but we will ask for that later.
+    # for now, save without validation.
     new_facebooker.save(false)
     
     # register the user

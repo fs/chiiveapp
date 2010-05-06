@@ -60,36 +60,37 @@ module AuthlogicFacebookConnect
 
         self.attempted_record =
           klass.find(:first, :conditions => { facebook_uid_field => facebook_session.user.uid })
-
-        unless self.attempted_record
-          begin
-            # Get the user from facebook and create a local user.
-            #
-            # We assign it after the call to new in case the attribute is protected.
-            new_user = klass.new
-            new_user.send(:"#{facebook_uid_field}=", facebook_session.user.uid)
-            # new_user.send(:"#{first_name_field}=", facebook_session.user.first_name)
-            new_user.send(:"#{last_name_field}=", facebook_session.user.last_name)
-            new_user.send(:"#{name_field}=", facebook_session.user.name)
-            new_user.send(:"#{login_field}=", "facebooker_#{facebook_session.user.uid}")
-            self.attempted_record = new_user
-            
-            # TODO: Find a better way to save the user record
-            # check validation - this will return false since we have not included password or email
-            # but it forces a save of the record
-            attempted_record.valid?
-            
-            # removed validation checking - we have no password or email,
-            # so the record is not valid and we need to skip
-            # errors.add_to_base(
-            #   I18n.t('error_messages.facebook_user_creation_failed',
-            #        :default => 'There was a problem creating a new user ' +
-            #                    'for your Facebook account')) unless attempted_record.valid?
-          rescue Facebooker::Session::SessionExpired
-            errors.add_to_base(I18n.t('error_messages.facebooker_session_expired', 
-              :default => "Your Facebook Connect session has expired, please reconnect."))
-          end
-        end
+        
+        # Create account during validation disabled
+        # unless self.attempted_record
+        #   begin
+        #     # Get the user from facebook and create a local user.
+        #     #
+        #     # We assign it after the call to new in case the attribute is protected.
+        #     new_user = klass.new
+        #     new_user.send(:"#{facebook_uid_field}=", facebook_session.user.uid)
+        #     new_user.send(:"#{first_name_field}=", facebook_session.user.first_name)
+        #     new_user.send(:"#{last_name_field}=", facebook_session.user.last_name)
+        #     new_user.send(:"#{name_field}=", facebook_session.user.name)
+        #     new_user.send(:"#{login_field}=", "facebooker_#{facebook_session.user.uid}")
+        #     self.attempted_record = new_user
+        #     
+        #     # TODO: Find a better way to save the user record
+        #     # check validation - this will return false since we have not included password or email
+        #     # but it forces a save of the record
+        #     attempted_record.valid?
+        #     
+        #     # removed validation checking - we have no password or email,
+        #     # so the record is not valid and we need to skip
+        #     # errors.add_to_base(
+        #     #   I18n.t('error_messages.facebook_user_creation_failed',
+        #     #        :default => 'There was a problem creating a new user ' +
+        #     #                    'for your Facebook account')) unless attempted_record.valid?
+        #   rescue Facebooker::Session::SessionExpired
+        #     errors.add_to_base(I18n.t('error_messages.facebooker_session_expired', 
+        #       :default => "Your Facebook Connect session has expired, please reconnect."))
+        #   end
+        # end
       end
       
       def authenticating_with_facebook_connect?
@@ -100,9 +101,9 @@ module AuthlogicFacebookConnect
         def facebook_uid_field
           self.class.facebook_uid_field
         end
-        # def first_name_field
-        #   self.class.first_name_field
-        # end
+        def first_name_field
+          self.class.first_name_field
+        end
         def last_name_field
           self.class.last_name_field
         end

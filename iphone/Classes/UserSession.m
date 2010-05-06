@@ -72,8 +72,6 @@
 		}
 		
 		[user updateWithProperties:properties];
-		
-		user.hasSynced = YES;
 		[Global getInstance].currentUser = user;
 		
 		[super requestDidFinishLoad:request];

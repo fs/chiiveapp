@@ -28,7 +28,7 @@
 	CHTableUserItem* item = [[[self alloc] init] autorelease];
 	item.userInfo = user;
 	item.text = user.displayName;
-	item.subtitle = [NSString stringWithFormat:@"%d Events", user.numGroups];
+	item.subtitle = nil; //[NSString stringWithFormat:@"%d Events", user.numGroups];
 	item.defaultImage = [UIImage imageNamed:@"icon_person.png"];
 	item.URL = user.isMutualFriend ? URL : nil;
 	item.imageURL = user.URLForAvatar;
@@ -65,14 +65,27 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 @implementation CHTableUserItemCell : TTTableSubtitleItemCell
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// TTTableViewCell class public
+
++ (CGFloat)tableView:(UITableView*)tableView rowHeightForObject:(id)object {
+	return 58;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// NSObject
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString*)identifier {
 	if (self = [super initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier]) {
 		self.detailTextLabel.font = [UIFont systemFontOfSize:12];
+		self.textLabel.font = [UIFont boldSystemFontOfSize:18];
 		self.textLabel.minimumFontSize = self.textLabel.font.pointSize;
 		self.textLabel.lineBreakMode = UILineBreakModeTailTruncation;
 	}
 	return self;
 }
+
 - (void)updateAccessoryType
 {
 	CHTableUserItem *item = self.object;
@@ -123,6 +136,16 @@
 	TTTableViewDelegate *tableViewDelegate = (TTTableViewDelegate *)parentTable.delegate;
 	[tableViewDelegate tableView:parentTable accessoryButtonTappedForRowWithIndexPath:indexPath];
 }
+
+- (void)layoutSubviews {
+	[super layoutSubviews];
+	
+	// inset the user image
+	if (_imageView2)
+		_imageView2.frame = CGRectInset(_imageView2.frame, 2, 2);
+}	
+
+
 @end
 
 
@@ -255,7 +278,6 @@
 - (void)layoutSubviews {
 	[super layoutSubviews];
 	
-	
 	if (self.leftButton.hidden && self.rightButton.hidden)
 	{
 		self.subtitleLabel.hidden = NO;
@@ -282,8 +304,6 @@
 			left += self.rightButton.frame.size.width + 5;
 		}
 	}
-	
-	
 }
 
 @end

@@ -160,7 +160,7 @@ static NSString *kInviteByEmail = @"Invite by Email";
 		[picker setSubject:@"Get Chiiving!"];
 		
 		// Fill out the email body text
-		NSString *emailBody = @"I'm using Chiive and you should too!\n\nChiive is an app that let's everyone share photos when they're out together.\n\nCheck it out at chiive.com.\n\nOr download it on Tunes.\nhttp://itunes.apple.com/us/app/chiive/id362351244?mt=8";
+		NSString *emailBody = @"I'm using Chiive and you should too!\r\n\r\nChiive is an app that let's everyone share photos when they're out together.\r\n\r\nCheck it out at chiive.com.\r\n\r\nOr download it on Tunes.\r\nhttp://itunes.apple.com/us/app/chiive/id362351244?mt=8";
 		[picker setMessageBody:emailBody isHTML:NO];
 		
 		[self presentModalViewController:picker animated:YES];

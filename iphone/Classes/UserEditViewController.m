@@ -15,6 +15,7 @@
 #import "CHActivityLabel.h"
 #import "InviteFriendsViewController.h"
 #import "FBLoginTableItemView.h"
+#import "UIImage+Resize.h"
 
 static NSString *kLogOutActionSheetTitle = @"Are you sure you want to log out?";
 //static NSString *kAnimationId = @"tableResizeAnimation";
@@ -794,8 +795,8 @@ static NSString *kLogOutActionSheetTitle = @"Are you sure you want to log out?";
 	self.submitButton.enabled = YES;
 	
 	UIImage *avatarOriginal = [info objectForKey:UIImagePickerControllerOriginalImage];
-	self.user.avatarImage = [avatarOriginal transformWidth:400 height:400 rotate:YES];
-	
+	self.user.avatarImage = [avatarOriginal thumbnailImage:400 transparentBorder:0 cornerRadius:0 interpolationQuality:1];
+
 	self.avatarView.defaultImage = self.user.avatarImage;
 	self.avatarView.urlPath = nil;
 	[self dismissModalViewController];

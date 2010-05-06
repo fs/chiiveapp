@@ -99,9 +99,11 @@ class UsersController < ApplicationController
       @user = User.find_by_id(params[:id])
     else
       @user = User.find_by_uuid(params[:id])
-    end   
+    end
     
-    update_user_roles(@user, params[:role])
+    if @user == current_user
+      update_user_roles(@user, params[:role]) unless params[:role].nil?
+    end
     
     respond_to do |format|
       if @user == current_user && @user.update_attributes(params[:user])

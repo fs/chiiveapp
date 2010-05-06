@@ -88,6 +88,7 @@
 		E84F173111335071000CA5F0 /* TTTableViewDelegateAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = E84F173011335071000CA5F0 /* TTTableViewDelegateAdditions.m */; };
 		E84F1B761134A231000CA5F0 /* GroupInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E84F1B751134A231000CA5F0 /* GroupInfoViewController.m */; };
 		E84FC65410D01CBA009D1C79 /* PostInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E84FC65310D01CBA009D1C79 /* PostInfoViewController.m */; };
+		E853666E11923CF6001AAF8C /* icon_friend_request.png in Resources */ = {isa = PBXBuildFile; fileRef = E853666D11923CF6001AAF8C /* icon_friend_request.png */; };
 		E855AE621071A03A00B84EB9 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = E855AE611071A03A00B84EB9 /* Comment.m */; };
 		E85887CA106857A500E99A35 /* UserTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E85887C9106857A500E99A35 /* UserTableViewController.m */; };
 		E85CFC281145C3330063ECA9 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = E85CFC231145C3330063ECA9 /* UIImage+Alpha.m */; };
@@ -167,7 +168,6 @@
 		E8DDEDDE1112492A00C50D44 /* InviteFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8DDEDDD1112492A00C50D44 /* InviteFriendsViewController.m */; };
 		E8E1AF7E1159462B00C67B42 /* CHTablePostItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E1AF7D1159462B00C67B42 /* CHTablePostItem.m */; };
 		E8E4B9D0116BBD9E00670894 /* FriendsSearchTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E4B9CF116BBD9E00670894 /* FriendsSearchTableViewController.m */; };
-		E8E4BBE2116BE4C800670894 /* icon_white_person.png in Resources */ = {isa = PBXBuildFile; fileRef = E8E4BBE1116BE4C800670894 /* icon_white_person.png */; };
 		E8E79B190FE0659500D2D374 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E79B180FE0659500D2D374 /* Post.m */; };
 		E8E79B250FE06A6E00D2D374 /* PostEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E79B240FE06A6E00D2D374 /* PostEditViewController.m */; };
 		E8EFB22410D053BF0021C16D /* icon_like.png in Resources */ = {isa = PBXBuildFile; fileRef = E8EFB22310D053BF0021C16D /* icon_like.png */; };
@@ -346,6 +346,7 @@
 		E84FC65210D01CBA009D1C79 /* PostInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostInfoViewController.h; sourceTree = "<group>"; };
 		E84FC65310D01CBA009D1C79 /* PostInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostInfoViewController.m; sourceTree = "<group>"; };
 		E8507EA210FBAC9D002148B3 /* ModelData.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = ModelData.xcdatamodel; sourceTree = "<group>"; };
+		E853666D11923CF6001AAF8C /* icon_friend_request.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_friend_request.png; path = Resources/icon_friend_request.png; sourceTree = "<group>"; };
 		E855AE601071A03A00B84EB9 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
 		E855AE611071A03A00B84EB9 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
 		E85887C8106857A500E99A35 /* UserTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserTableViewController.h; sourceTree = "<group>"; };
@@ -467,7 +468,6 @@
 		E8E1AF7D1159462B00C67B42 /* CHTablePostItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHTablePostItem.m; sourceTree = "<group>"; };
 		E8E4B9CE116BBD9E00670894 /* FriendsSearchTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsSearchTableViewController.h; sourceTree = "<group>"; };
 		E8E4B9CF116BBD9E00670894 /* FriendsSearchTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsSearchTableViewController.m; sourceTree = "<group>"; };
-		E8E4BBE1116BE4C800670894 /* icon_white_person.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_white_person.png; path = Resources/icon_white_person.png; sourceTree = "<group>"; };
 		E8E79B170FE0659500D2D374 /* Post.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
 		E8E79B180FE0659500D2D374 /* Post.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
 		E8E79B230FE06A6E00D2D374 /* PostEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostEditViewController.h; sourceTree = "<group>"; };
@@ -890,6 +890,7 @@
 		E86CB324100569F8008F4DAF /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				E853666D11923CF6001AAF8C /* icon_friend_request.png */,
 				E899CA12117920F80058F0CE /* tutorial_invite_new_friends.png */,
 				E88D27F4117913CA008B64B2 /* table_cell_group_photo_background.png */,
 				E86A39971178FF9200A73798 /* logo_large.png */,
@@ -898,7 +899,6 @@
 				E8BE3F73117510C200F2B475 /* tutorial_add_photos.png */,
 				E8BE3F74117510C200F2B475 /* tutorial_home.png */,
 				E8BE3F75117510C200F2B475 /* tutorial_start_event.png */,
-				E8E4BBE1116BE4C800670894 /* icon_white_person.png */,
 				D4DB13D01165BE3C008148FD /* table_image_addfriend_addressbook.png */,
 				D4DB13D11165BE3C008148FD /* table_image_addfriend_facebook.png */,
 				D4DB13D21165BE3C008148FD /* table_image_addfriend_find.png */,
@@ -1271,7 +1271,6 @@
 				D4DB13D51165BE3C008148FD /* table_image_addfriend_facebook.png in Resources */,
 				D4DB13D61165BE3C008148FD /* table_image_addfriend_find.png in Resources */,
 				D4DB13D71165BE3C008148FD /* table_image_addfriend_invite.png in Resources */,
-				E8E4BBE2116BE4C800670894 /* icon_white_person.png in Resources */,
 				E8BE3F76117510C200F2B475 /* tutorial_add_attendees.png in Resources */,
 				E8BE3F77117510C200F2B475 /* tutorial_add_friends.png in Resources */,
 				E8BE3F78117510C200F2B475 /* tutorial_add_photos.png in Resources */,
@@ -1280,6 +1279,7 @@
 				E86A39981178FF9200A73798 /* logo_large.png in Resources */,
 				E88D27F5117913CA008B64B2 /* table_cell_group_photo_background.png in Resources */,
 				E899CA13117920F80058F0CE /* tutorial_invite_new_friends.png in Resources */,
+				E853666E11923CF6001AAF8C /* icon_friend_request.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

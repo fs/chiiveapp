@@ -46,7 +46,7 @@ static const CGFloat	kPadding = 10;
 	NSInteger numAttendees = group.numUsers;
 	NSString *othersString;
 	if (numAttendees > 2)
-		othersString = [NSString stringWithFormat:@" and %d others", group.friendModel.numberOfChildren];
+		othersString = [NSString stringWithFormat:@" and %d others", group.friendModel.numberOfChildren - 1];
 	else if (numAttendees > 1)
 		othersString = @" and 1 other";
 	else

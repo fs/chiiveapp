@@ -289,7 +289,6 @@
 	
 	self.request = nil;
 	self.isOutdated = NO;
-	self.hasSynced = YES;
 	[_delegates perform:@selector(modelDidFinishLoad:) withObject:self];
 }
 
@@ -510,10 +509,12 @@
 
 - (void)updateWithProperties:(NSDictionary *)properties
 {
+	// update with properties is used for remote server responses, 
+	// so the record must be synced with the server (even if out of date)
+	self.hasSynced = YES;
+	
 	if (!![properties objectForKey:@"uuid"])
 		self.UUID = [properties objectForKey:@"uuid"];
-	//	self.createdAt = [FormatterHelper dateTimeFromString:[properties objectForKey:@"created_at"]];
-	//	self.updatedAt = [FormatterHelper dateTimeFromString:[properties objectForKey:@"updated_at"]];
 }
 
 - (void)deleteRemote

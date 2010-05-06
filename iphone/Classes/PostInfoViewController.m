@@ -120,7 +120,7 @@ static NSString *kButtonEdit = @"Edit Caption";
 	[picker addAttachmentData:myData mimeType:@"image/png" fileName:@"chiive_photo"];
 	
 	// Fill out the email body text
-	NSString *emailBody = @"Check out this photo from Chiive!\n\nChiive is an app that let's everyone share photos when they're out together.\n\nCheck it out at chiive.com.\n\nOr download it on Tunes.\nhttp://itunes.apple.com/us/app/chiive/id362351244?mt=8";
+	NSString *emailBody = @"Check out this photo from Chiive!\r\n\r\nChiive is an app that let's everyone share photos when they're out together.\r\n\r\nCheck it out at chiive.com.\r\n\r\nOr download it on Tunes.\r\nhttp://itunes.apple.com/us/app/chiive/id362351244?mt=8";
 	[picker setMessageBody:emailBody isHTML:NO];
 	
 	[self presentModalViewController:picker animated:YES];

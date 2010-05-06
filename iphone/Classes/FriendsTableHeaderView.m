@@ -22,7 +22,8 @@
 		_backgroundView.userInteractionEnabled = NO;
 		[self addSubview:_backgroundView];
 		
-		_alertImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_white_person.png"]];
+		_alertImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_friend_request.png"]];
+		_alertImageView.alpha = 0.7;
 		[_backgroundView addSubview:_alertImageView];
 		
 		_numberOfRequestsLabel = [[UILabel alloc] initWithFrame:CGRectZero];
@@ -36,7 +37,7 @@
 		_viewLabel.backgroundColor = [UIColor clearColor];
 		_viewLabel.font = [UIFont boldSystemFontOfSize:15];
 		_viewLabel.text = @"View";
-		[_backgroundView addSubview:_viewLabel];
+//		[_backgroundView addSubview:_viewLabel];
 		
 		_disclosureImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"accessory_disclosure_indicator.png"]];
 		_disclosureImageView.alpha = 0.8;
@@ -62,7 +63,7 @@
 	NSInteger padding = 5;
 	NSInteger left = padding;
 	
-	_alertImageView.frame = CGRectMake(padding, round((self.height - _alertImageView.height) * 0.5), _alertImageView.width, _alertImageView.height);
+	_alertImageView.frame = CGRectMake(padding, (self.height - _alertImageView.height), _alertImageView.width, _alertImageView.height);
 	left += _alertImageView.width + padding * 2;
 	
 	CGSize numberSize = [_numberOfRequestsLabel.text sizeWithFont:_numberOfRequestsLabel.font];

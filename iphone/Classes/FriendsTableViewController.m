@@ -165,7 +165,7 @@
 	if (numRequests > 0 && self.friendsHeaderView.hidden)
 	{
 		self.friendsHeaderView.hidden = NO;
-		self.friendsHeaderView.frame = CGRectMake(0, -TT_TOOLBAR_HEIGHT, self.tableView.width, TT_TOOLBAR_HEIGHT);
+		self.friendsHeaderView.frame = CGRectMake(0, -40, self.tableView.width, 40);
 		
 		// adjust the pull to refresh view according to the new friends header height
 		delegate.headerView.frame = CGRectOffset(delegate.headerView.frame, 0, -self.friendsHeaderView.height);
