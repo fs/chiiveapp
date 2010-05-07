@@ -1,5 +1,10 @@
 class SocialSet < ActiveRecord::Base
-  include UUIDHelper
+
+  #####################################################
+  # BEHAVIORS
+  #####################################################
+  acts_as_uuidobject
+
   
   #####################################################
   # ASSOCIATIONS

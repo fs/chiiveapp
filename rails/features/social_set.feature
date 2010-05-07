@@ -4,11 +4,14 @@ Feature: Social Set JSON Interface
 	I want to create, update, and view a social set
 	
 	Scenario: View an event
-		Given a social_set exists with title "Hot Diggity!"
-		# And the event was created by Chiive user "John Smith"
-		# And the event has 4 images
-		# And the event has 3 attendees
-		# And the event has 2 comments
-		And I am on the social_set page for this social_set
+		Given I am logged in as "admin@chiive.com" with password "secret"
+		And a social_set exists
+		And the social_set has title "Hot Diggity!"
+		And the social_set was created by user "John Smith"
+		And the social_set has 4 posts
+		And the social_set has 2 attendees
+		And the social_set has 2 comments
+		And I am on the social_set's page
 		Then I should see "Hot Diggity"
-		# And I should see "John Smith"
+		And I should see "John Smith"
+		

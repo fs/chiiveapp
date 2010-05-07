@@ -1,9 +1,16 @@
 class User < ActiveRecord::Base
-  include UUIDHelper
   include GeoKit::Geocoders
 
-  acts_as_authentic
+  #####################################################
+  # BEHAVIORS
+  #####################################################
+  acts_as_uuidobject
+
   acts_as_fischyfriend
+
+  acts_as_authentic do |c|
+    c.login_field = 'email'
+  end
   
   easy_roles :roles_mask, :method => :bitmask
   
@@ -12,23 +19,15 @@ class User < ActiveRecord::Base
   ROLES_MASK = %w[admin moderator]
   
   
-  has_attached_file :avatar_image, :styles => { :small => "75x75#", :full => "480x480>" },
-                            :convert_options => { :all => '-auto-orient' },
-                            :storage => :filesystem
-                            
-                            # Default values (we can ommit them)
-                            # ,
-                            # :path => ":rails_root/public/system/:attachment/:id/:style/:filename",
-                            # :url => "/system/:attachment/:id/:style/:filename"
-                            #
-                            # We could use uuid?
-                            # :url => "/system/:attachment/:uuid/:style/:filename"
-  
+  #####################################################
+  # ASSOCIATIONS
+  #####################################################
   belongs_to :home_address,
              :class_name => 'Address',
              :foreign_key => 'home_address_id'
   
   has_many :personal_sets
+  
   has_many :posts do
     def last_taken
       find(:first, :order => 'time_at DESC')
@@ -39,6 +38,14 @@ class User < ActiveRecord::Base
             :through => :personal_sets,
             :order => 'time_at DESC'
   
+  has_attached_file :avatar_image, :styles => { :small => "75x75#", :full => "480x480>" },
+                            :convert_options => { :all => '-auto-orient' },
+                            :storage => :filesystem
+
+  
+  #####################################################
+  # CALLBACKS
+  #####################################################
   after_create :register_user_to_fb
   
   # the URL path to the user's avatar
@@ -83,6 +90,7 @@ class User < ActiveRecord::Base
   end
   
   def pretty_name
+    return "#{self.first_name} #{self.last_name}" unless self.first_name.blank? and self.last_name.blank?
     return self.first_name unless self.first_name.blank?
     return self.name unless self.name.blank?
     return self.login

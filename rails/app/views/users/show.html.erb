@@ -48,6 +48,10 @@
 
 	<%= render @user %>
 	
+	<% if current_user.is_admin? %>
+		<p>Role: <%= @user.is_admin? ? 'Admin' : 'User' %></p>
+	<% end %>
+	
 	<% if @user == current_user %>
 		<p><%= link_to "Edit Account", edit_user_path(@user) %></p>
 	<% end %>

@@ -16,16 +16,7 @@ class SocialSetsController < ApplicationController
     }
     
     # @updated_at = Time.new # 10.days.ago # 
-    
-    if params[:user_id].nil?
-      @user = nil
-    elsif (params[:user_id].to_s == params[:user_id].to_i.to_s)
-      @user = User.find_by_id(params[:user_id])
-    else
-      @user = User.find_by_uuid(params[:user_id])
-    end
-      
-      
+    @user = params[:user_id].nil? ? nil : User.find_by_ambiguous_id(params[:user_id])
       
     # Null user
     if @user.nil?
@@ -95,11 +86,7 @@ class SocialSetsController < ApplicationController
   # SHOW
   #####################################################
   def show
-    if (params[:id].to_s == params[:id].to_i.to_s)
-      @social_set = SocialSet.find_by_id(params[:id])
-    else
-      @social_set = SocialSet.find_by_uuid(params[:id])
-    end
+    @social_set = SocialSet.find_by_ambiguous_id(params[:id])
     
     respond_to do |format|
       format.html
@@ -131,12 +118,7 @@ class SocialSetsController < ApplicationController
   
   def update 
     social_set_data = params[:social_set].blank? ? params[:event] : params[:social_set]
-   
-    if (params[:id].to_s == params[:id].to_i.to_s)
-     @social_set = SocialSet.find_by_id(params[:id])
-    else
-     @social_set = SocialSet.find_by_uuid(params[:id])
-    end   
+    @social_set = SocialSet.find_by_ambiguous_id(params[:id])
 
     respond_to do |format|
      if current_user == @social_set.default_user && @social_set.default_personal_set.update_attributes(social_set_data[:personal_sets_attributes]['0'])
@@ -179,12 +161,8 @@ class SocialSetsController < ApplicationController
   def create
     social_set_data = params[:social_set].blank? ? params[:event] : params[:social_set]
     
-    if !social_set_data[:id].nil?
-      if (social_set_data[:id].to_s == social_set_data[:id].to_i.to_s)
-        @social_set = SocialSet.find_by_id(social_set_data[:id])
-      else
-        @social_set = SocialSet.find_by_uuid(social_set_data[:id])
-      end
+    unless social_set_data[:id].nil?
+      @social_set = SocialSet.find_by_ambiguous_id(social_set_data[:id])
     end
     
     if @social_set.nil? && !social_set_data[:uuid].blank?
@@ -255,11 +233,7 @@ class SocialSetsController < ApplicationController
     
     # Lets try to get the social_set in question
     if !params[:id].nil?
-      if (params[:id].to_s == params[:id].to_i.to_s)
-        @social_set = SocialSet.find_by_id(params[:id])
-      else
-        @social_set = SocialSet.find_by_uuid(params[:id])
-      end   
+      @social_set = SocialSet.find_by_ambiguous_id(params[:id])
     end
     
     respond_to do |format|

@@ -6,16 +6,12 @@ class CommentsController < ApplicationController
   
   def index
     
-    if (params[:post_id] && params[:user_id].to_s == params[:user_id].to_i.to_s)
-      @post = Post.find(params[:post_id]) 
+    if (params[:post_id])
+      @post = Post.find_by_ambiguous_id(params[:post_id]) 
       @comments = @post.comments
-    elsif (params[:post_id])
-      @post = Post.find_by_uuid(params[:post_id]) 
-      @comments = @post.comments
-    end
     
-    if (params[:personal_set_id])
-      @personal_set = PersonalSet.find(params[:personal_set_id])
+    elsif (params[:personal_set_id])
+      @personal_set = PersonalSet.find_by_ambiguous_id(params[:personal_set_id])
       @comments = @personal_set.comments
     end
     
@@ -40,11 +36,7 @@ class CommentsController < ApplicationController
   end
 
   def show
-    if (params[:id].to_s == params[:id].to_i.to_s)
-      @comment = Comment.find(params[:id])
-    else
-      @comment = Comment.find_by_uuid(params[:id])
-    end
+    @comment = Comment.find_by_ambiguous_id(params[:id])
     
     respond_to do |format|
       format.html # show.html.erb
@@ -68,8 +60,7 @@ class CommentsController < ApplicationController
   end
 
   def edit
-    #@user = User.find(params[:user_id])
-    @comment = Comment.find(params[:id])
+    @comment = Comment.find_by_ambiguous_id(params[:id])
 
     if @comment.user == current_user
     # ALLOW EDIT
@@ -112,11 +103,7 @@ class CommentsController < ApplicationController
   end
 
   def update
-    if (params[:id].to_s == params[:id].to_i.to_s)
-      @comment = Comment.find(params[:id])
-    else
-      @comment = Comment.find_by_uuid(params[:id])
-    end
+    @comment = Comment.find_by_ambiguous_id(params[:id])
     
     respond_to do |format|
       if @comment.user == current_user && @comment.update_attributes(params[:comment])
@@ -149,11 +136,7 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    if (params[:id].to_s == params[:id].to_i.to_s)
-      @comment = Comment.find(params[:id])
-    else
-      @comment = Comment.find_by_uuid(params[:id])
-    end
+    @comment = Comment.find_by_ambiguous_id(params[:id])
     
     if (comment.user == current_user)
       @comment.destroy

@@ -1,7 +1,8 @@
 Factory.define :user do |f|
-  f.sequence(:name) { |n| "Frank #{n}" }
-  f.sequence(:login) { |m| "frank#{m}" }
-  f.sequence(:email) { |o| "frank#{o}@example.com" }
+  f.sequence(:first_name) { |n| "Frank#{n}" }
+  f.sequence(:last_name) { |n| "Furter#{n}" }
+  f.sequence(:login) { |n| "frank#{n}" }
+  f.sequence(:email) { |n| "frank#{n}@furter.com" }
   f.password "fo0bar"
   f.password_confirmation { |u| u.password }
 end
@@ -30,5 +31,11 @@ Factory.define :post do |f|
   f.photo_updated_at Time.now
   f.association :user
   f.association :personal_set
+end
+
+Factory.define :comment do |f|
+  f.sequence(:title) { |n| "Title#{n}" }
+  f.sequence(:body) { |n| "Body #{n}" }
+  f.association :user
 end
 

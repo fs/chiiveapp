@@ -1,9 +1,10 @@
 class Post < ActiveRecord::Base
-  include UUIDHelper
   
   #####################################################
   # BEHAVIORS
   #####################################################
+  acts_as_uuidobject
+  
   acts_as_mappable :lat_column_name => "latitude",
                    :lng_column_name => "longitude"
   

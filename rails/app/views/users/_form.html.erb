@@ -23,10 +23,10 @@
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation %>
   </p>
-  <% if current_user.is_admin? || defined?(@fake_admin) %>
+  <% if (!!current_user && current_user.is_admin?) || defined?(@fake_admin) %>
   <p>
     <label>Role</label><br />
-	
+	<input type="hidden" name="user_privileges" value="1" />
 	<input type="checkbox" name="role[admin]" id="role[admin]" value="yes" <%= "checked=\"checked\"" if @user.is_admin? %> />
 	<label for="role[admin]">Admin</label><br />
 	

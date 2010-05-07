@@ -1,0 +1,56 @@
+-------------------------------------------------
+Overview
+-------------------------------------------------
+Chiive is a social photo sharing service.  Users can create events or join other users's events.
+Within an event users can add photos and comment on photos already there.
+
+
+-------------------------------------------------
+Rails Application Data Model
+-------------------------------------------------
+Primary Objects:
+User: a Chiive user
+Post: a photo
+PersonalSet: A group of photos from one user
+SocialSet: An event, which is a group of PersonalSets from different users.
+
+Users create and own Posts (photo), Posts are grouped into PersonalSets, and PersonalSets are 
+grouped into SocialSets to create an event.  An event with one attendee is a SocialSet that contains
+a single PersonalSet.  When a users create Events, they are creating a PersonalSet to hold their
+photos, and a SocialSet that acts as the Event, which other Users can join by adding their
+PersonalSets to the SocialSet.
+
+Once a User has created a SocialSet, other Users nearby, around the same time, will see the
+Event as a Suggested Event, inviting these other Users to join and contribute Posts.  When joining an
+Event, a PersonalSet is created for that User, belonging to the overall SocialSet.
+
+When two users each have a PeronalSet belonging to the same SocialSet, the photos for each 
+PersonalSet appear grouped together to both users. The owners of PersonalSets are displayed as 
+"Attendees" of the Event they belong to.
+
+In addition to creating Posts and SocialSets, users may add Comments to SocialSets or Posts,
+and create Frienships with other users.
+
+
+-------------------------------------------------
+Chiive Time and Position Tracking
+-------------------------------------------------
+Chiive relies on the time and location of Posts, PersonalSets, and SocialSets to suggest
+nearby SocialSets to Users.
+
+Posts, PersonalSets, and SocialSets are each tagged with a time, latitude and longitude. 
+When a Post is added to a PersonalSet, the PersonalSet's time and location are incrementally updated.
+When a PersonalSet's time and location change, the parent SocialSet's time and location are
+incrementally updated.
+
+
+-------------------------------------------------
+Server Setup
+-------------------------------------------------
+Chiive is hosted on Amazon EC2, and deployed with capistrano and the experimental branch of ec2onrails.
+The experimental branch of ec2onrails can be installed from github.com/pauldowman/ec2onrails using:
+
+gem install ec2onrails-experimental
+
+With the ec2onrails and the public/private keys in place locally, deploy with the standard “cap deploy:migrations”.
+Post photos and user avatars are all hosted on Amazon S3, using Thoughtbot's Paperclip gem.

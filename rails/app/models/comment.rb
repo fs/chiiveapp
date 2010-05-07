@@ -1,5 +1,5 @@
 class Comment < ActiveRecord::Base
-  include UUIDHelper
+  acts_as_uuidobject
   
   validates_presence_of :title
   

@@ -12,11 +12,7 @@ class PostsController < ApplicationController
       :page => params[:page]
     }
     
-    if (params[:user_id].to_s == params[:user_id].to_i.to_s)
-      @user = User.find_by_id(params[:user_id])
-    else
-      @user = User.find_by_uuid(params[:user_id])
-    end   
+    @user = User.find_by_ambiguous_id(params[:user_id])
     
     if not params[:personal_set_id].nil?
       puts "personal set id checked!"
@@ -25,12 +21,7 @@ class PostsController < ApplicationController
     
     elsif not params[:social_set_id].nil?
       puts "social set id checked!"
-      if (params[:social_set_id].to_s == params[:social_set_id].to_i.to_s)
-        @social_set = SocialSet.find(params[:social_set_id])
-      else
-        @social_set = SocialSet.find_by_uuid(params[:social_set_id])
-      end
-      
+      @social_set = SocialSet.find_by_ambiguous_id(params[:social_set_id])
       @posts = @social_set.posts
     end
     
@@ -55,11 +46,7 @@ class PostsController < ApplicationController
   end
   
   def show
-    if (params[:id].to_s == params[:id].to_i.to_s)
-      @post = Post.find_by_id(params[:id])
-    else
-      @post = Post.find_by_uuid(params[:id])
-    end   
+    @post = Post.find_by_ambiguous_id(params[:id])
     
     respond_to do |format|
       format.html # show.html.erb
@@ -89,12 +76,7 @@ class PostsController < ApplicationController
     
     if @post.personal_set.nil?
       @post.build_personal_set
-      
-      if (params[:social_set_id].to_s == params[:social_set_id].to_i.to_s)
-        @post.personal_set.social_set = SocialSet.find(params[:social_set_id])
-      else
-        @post.personal_set.social_set = SocialSet.find_by_uuid(params[:social_set_id])
-      end
+      @post.personal_set.social_set = SocialSet.find_by_ambiguous_id(params[:social_set_id])
     end
     
     puts "post user: #{@post.user}"
@@ -132,12 +114,7 @@ class PostsController < ApplicationController
     end
     
     @post.user = current_user
-    
-    if (params[:social_set_id].to_s == params[:social_set_id].to_i.to_s)
-      social_set = SocialSet.find_by_id(params[:social_set_id])
-    else
-      social_set = SocialSet.find_by_uuid(params[:social_set_id])
-    end
+    social_set = SocialSet.find_by_ambiguous_id(params[:social_set_id])
     
     @post.time_at = Time.new if @post.time_at.blank?
     
@@ -173,11 +150,7 @@ class PostsController < ApplicationController
   end
   
   def update
-    if (params[:id].to_s == params[:id].to_i.to_s)
-      @post = Post.find_by_id(params[:id])
-    else
-      @post = Post.find_by_uuid(params[:id])
-    end   
+    @post = Post.find_by_ambiguous_id(params[:id])
     
     respond_to do |format|
       if @post.user == current_user && @post.update_attributes(params[:post])
@@ -201,11 +174,7 @@ class PostsController < ApplicationController
   end
   
   def destroy
-    if (params[:id].to_s == params[:id].to_i.to_s)
-      @post = Post.find_by_id(params[:id])
-    else
-      @post = Post.find_by_uuid(params[:id])
-    end
+    @post = Post.find_by_ambiguous_id(params[:id])
     
     respond_to do |format|
       unless @post.nil? || @post.user != current_user

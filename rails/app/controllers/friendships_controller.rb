@@ -3,11 +3,7 @@ class FriendshipsController < ApplicationController
   protect_from_forgery :except => [:create, :destroy, :index, :find_by_email]
   
   def index
-    if (params[:user_id].to_s == params[:user_id].to_i.to_s)
-      @user = User.find(params[:user_id])
-    else
-      @user = User.find_by_uuid(params[:user_id])
-    end
+    @user = User.find_by_ambiguous_id(params[:user_id])
     
     # Set up conditions for searching for only non-friends
     joins = nil
@@ -56,11 +52,7 @@ class FriendshipsController < ApplicationController
   end
   
   def find_by_email
-    if (params[:user_id].to_s == params[:user_id].to_i.to_s)
-      @user = User.find(params[:user_id])
-    else
-      @user = User.find_by_uuid(params[:user_id])
-    end
+    @user = User.find_by_ambiguous_id(params[:user_id])
     
     # Set up conditions for searching for only non-friends
     joins = nil
@@ -82,11 +74,7 @@ class FriendshipsController < ApplicationController
   end
   
   def create
-    if (params[:friend_id].to_s == params[:friend_id].to_i.to_s)
-      @user = User.find(params[:friend_id])
-    else
-      @user = User.find_by_uuid(params[:friend_id])
-    end
+    @user = User.find_by_ambiguous_id(params[:friend_id])
     
     # check if the friendship is already set up
     if (current_user.is_friends_with?(@user) || current_user.id == @user.id)
