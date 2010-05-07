@@ -35,15 +35,15 @@
 					personal_set = social_set.personal_sets.find_by_user_id(current_user.id)
 					if personal_set.nil? 
 						concat "<div class=\"button\">"
-						concat link_to "+ Check IN v.3", user_social_sets_path(current_user, :social_set => {:id => social_set.uuid, :personal_sets_attributes => [{:longitude => "0", :latitude => "0", :time_at => "01/01/1970"}] }), :method => "post"
+						concat link_to("+ Check IN v.3", user_social_sets_path(current_user, :social_set => {:id => social_set.uuid, :personal_sets_attributes => [{:longitude => "0", :latitude => "0", :time_at => "01/01/1970"}] }), :method => "post")
 						concat "</div>"
 				 	else
 					  concat "<div class=\"button\">"
-					  concat link_to "+ new Post", new_user_social_set_post_path(current_user, social_set), :onclick => "	$.ajax({url: '#{new_user_social_set_post_path(current_user, social_set)}', dataType: 'script'}); return false;"
+					  concat link_to("+ new Post", new_user_social_set_post_path(current_user, social_set), :onclick => "	$.ajax({url: '#{new_user_social_set_post_path(current_user, social_set)}', dataType: 'script'}); return false;")
 					  concat "</div>"
 					  if personal_set.posts.size == 0
 						concat "<div class=\"button\">"
-						concat link_to "+ Check OUT v.2", user_social_set_path(current_user, social_set), :method => "delete"
+						concat link_to("+ Check OUT v.2", user_social_set_path(current_user, social_set), :method => "delete")
 						concat "</div>"
 					  end
 					end
