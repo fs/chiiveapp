@@ -1,0 +1,19 @@
+<% @social_sets.each do |event| %>
+  <div id="info">
+    <% if event.default_user %>
+      <%= fb_user_avatar(event.default_user) %>
+	
+    	<p class="by">
+    	  <strong><%= fb_user_name(event.default_user) %></strong> posted
+    	</p>
+  	<% end %>
+	
+  	<h1><%= link_to h(event.title), event %></h1>
+	
+  	<p class="count">
+  	  <strong><%= pluralize event.personal_sets.count, 'person' %></strong>
+  	  took
+  	  <strong><%= pluralize event.posts.count, 'photo' %></strong>
+  	</p>
+  </div>
+<% end %>

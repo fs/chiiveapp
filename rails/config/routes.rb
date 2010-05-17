@@ -21,12 +21,12 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :friendships, :only => [:create, :destroy]
   
   # allow browsing of social sets
-  map.resources :social_sets do |social_sets|
-    social_sets.resources :comments
-    social_sets.resources :posts do |posts|
-      posts.resources :comments
-    end
-  end
+  # map.resources :social_sets do |social_sets|
+  #   social_sets.resources :comments
+  #   social_sets.resources :posts do |posts|
+  #     posts.resources :comments
+  #   end
+  # end
   
   map.resources :social_sets, :as => :events do |social_sets|
     social_sets.resources :comments
@@ -72,7 +72,6 @@ ActionController::Routing::Routes.draw do |map|
   map.get_updates 'stay-in-touch', :controller => 'subscribers', :action => 'new'
   
   map.connect ':action', :controller => 'static_content'
-  
   map.root :controller => :static_content, :action => 'index'
 end
 

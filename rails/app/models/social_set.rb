@@ -15,7 +15,7 @@ class SocialSet < ActiveRecord::Base
            :before_add => :update_metrics_with_set,
            :order => "order_social_set ASC"
            
-  has_many :posts, :through => :personal_sets, :order => "time_at DESC"
+  has_many :posts, :through => :personal_sets, :order => "posts.time_at DESC"
   has_many :users, :through => :personal_sets
   has_many :comments, :as => :commentable
   

@@ -94,9 +94,11 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if @comment.save
         format.html { redirect_to params[:redirect_url] }
+        format.fbml { redirect_to root_url[0..-2] + params[:redirect_url] }
         format.json { render :action => 'show' }
       else
         format.html { redirect_to params[:redirect_url] }
+        format.fbml { redirect_to root_url[0..-2] + params[:redirect_url] }
         format.json  { render :json => @comment.errors }
       end
     end
@@ -138,12 +140,13 @@ class CommentsController < ApplicationController
   def destroy
     @comment = Comment.find_by_ambiguous_id(params[:id])
     
-    if (comment.user == current_user)
+    if @comment.user == current_user
       @comment.destroy
     end
     
     respond_to do |format|
        format.html { redirect_to params[:redirect_url] }
+       format.fbml { redirect_to root_url[0..-2] + params[:redirect_url] }
        format.json  { head :ok }
     end
   end

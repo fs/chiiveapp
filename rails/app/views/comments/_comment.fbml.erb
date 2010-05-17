@@ -1,0 +1,9 @@
+<div class="comment">
+  <%= fb_user_avatar(comment.user, :width => 35, :height => 35) %>
+	<p><strong><%= fb_user_name(comment.user) %></strong> <%=h comment.body %></p>
+	<p class="info"><%= time_ago_in_words(comment.created_at) %> ago</p>
+	
+	<% if current_user && current_user == comment.user %>
+    <%= link_to 'Delete', comment_path(comment, :redirect_url => request.request_uri), :confirm => 'Are you sure?', :method => :delete, :class => 'delete_comment' %>
+  <% end %>  
+</div>

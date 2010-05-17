@@ -14,7 +14,7 @@ class PersonalSet < ActiveRecord::Base
             :before_add => :update_metrics_with_post,
             :include => :user,
             :autosave => true,
-            :order => "time_at DESC",
+            :order => "posts.time_at DESC",
             :dependent => :destroy
   
   

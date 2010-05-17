@@ -40,7 +40,8 @@ class User < ActiveRecord::Base
   
   has_attached_file :avatar_image, :styles => { :small => "75x75#", :full => "480x480>" },
                             :convert_options => { :all => '-auto-orient' },
-                            :storage => :filesystem
+                            :storage => :filesystem,
+                            :default_url => "/images/missing/:attachment_:style.jpg"
 
   
   #####################################################
@@ -147,6 +148,14 @@ class User < ActiveRecord::Base
     
     # return the final value
     new_facebooker
+  end
+  
+  def self.find_or_create_facebook_user(facebook_session)
+    fbuser = find_by_fb_user(facebook_session.user)
+    if fbuser.blank?
+      fbuser = create_from_fb_connect(facebook_session.user)
+    end
+    fbuser
   end
   
   #The Facebook register users method is going to send the users email hash and our account id to Facebook

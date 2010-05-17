@@ -33,8 +33,12 @@ module NavigationHelpers
 
     when /^the (.+?) page$/                                         # translate to named route
       send "#{$1.downcase.gsub(' ','_')}_path"
+    # end added by pickle path  
   
-    # end added by pickle path
+    when 'the event page for the event'
+      social_set_path(@event)
+    when 'the post page for the post'
+      social_set_post_path(@event, @post)
 
     else
       raise "Can't find mapping from \"#{page_name}\" to a path.\n" +

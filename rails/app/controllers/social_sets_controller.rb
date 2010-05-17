@@ -71,6 +71,7 @@ class SocialSetsController < ApplicationController
     
     respond_to do |format|
       format.html # index.html.erb
+      format.fbml
       format.xml { render :xml => @social_sets.to_xml }
       format.json { 
         if params[:client_type].blank? and params[:client_version].blank?
@@ -87,9 +88,13 @@ class SocialSetsController < ApplicationController
   #####################################################
   def show
     @social_set = SocialSet.find_by_ambiguous_id(params[:id])
+    @posts = @social_set.posts.paginate(:page => params[:posts_page], :per_page => 48)
+    @personal_sets = @social_set.personal_sets.paginate(:page => params[:users_page], :per_page => 10)
     
     respond_to do |format|
       format.html
+      format.fbml
+      format.fbjs
       format.xml { render :xml => @social_sets.to_xml }
       format.json { 
         if params[:client_type].blank? and params[:client_version].blank?
@@ -191,8 +196,8 @@ class SocialSetsController < ApplicationController
       # if there is no personal_set exists for this user, then check him in!
       if personal_set.nil? 
         # Checkin in (create a new personal_set)
-        social_set_data[:personal_sets_attributes]['0'][:user_id] = current_user.id
-        social_set_data[:personal_sets_attributes]['0'][:title] = @social_set.title
+        social_set_data[:personal_sets_attributes][0][:user_id] = current_user.id
+        social_set_data[:personal_sets_attributes][0][:title] = @social_set.title
 
         @social_set.attributes = social_set_data
         

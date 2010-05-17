@@ -50,6 +50,8 @@ class PostsController < ApplicationController
     
     respond_to do |format|
       format.html # show.html.erb
+      format.fbml
+      format.fbjs
       format.xml  { render :xml => @post.to_xml(:except => [:address_id]) }
       format.json { 
         if params[:client_type].blank? and params[:client_version].blank?

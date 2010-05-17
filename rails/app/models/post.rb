@@ -10,12 +10,12 @@ class Post < ActiveRecord::Base
   
   has_attached_file :photo, :styles => { :small => "150x150>", :iphone_preview => "75x75#", :iphone => "480x480>" },
                             # include convert options to hanlde orientation of iphone images
-                            :convert_options => { :all => '-auto-orient' },
+                            :convert_options => { :all => '-auto-orient' }
                             # Access storage data from APP_STORAGE hash
-                            :s3_credentials => "#{RAILS_ROOT}/config/s3.yml",
-                            :storage => APP_STORAGE[RAILS_ENV]['storage'],
-                            :path => APP_STORAGE[RAILS_ENV]['path'],
-                            :url => APP_STORAGE[RAILS_ENV]['url']
+                            # :s3_credentials => "#{RAILS_ROOT}/config/s3.yml",
+                            # :storage => APP_STORAGE[RAILS_ENV]['storage'],
+                            # :path => APP_STORAGE[RAILS_ENV]['path'],
+                            # :url => APP_STORAGE[RAILS_ENV]['url']
   
   
   #####################################################
@@ -61,6 +61,17 @@ class Post < ActiveRecord::Base
     self.text.blank? ? 'No Description' : self.text
   end
   
+  def position
+    social_set.posts.to_a.index(self).to_i
+  end
+  
+  def previous_post
+    position > 0 ? social_set.posts.to_a[position - 1] : nil
+  end
+  
+  def next_post
+    position < social_set.posts.count ? social_set.posts.to_a[position + 1] : nil
+  end
   
   #####################################################
   # METRICS
