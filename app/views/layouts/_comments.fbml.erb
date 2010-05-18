@@ -1,12 +1,14 @@
 <div id="comments">
   <% unless commentable.comments.blank? %>
     <span class="blurb">&nbsp;</span>
-    <%= render commentable.comments %>
+    <% commentable.comments.each do |comment| %>
+      <%= render 'comments/comments.fbml', :comment => comment %>
+    <% end %>
   <% end %>
 </div>
 
 <div id="postcomment">
-  <%= render 'comments/form',
+  <%= render 'comments/form.fbml',
         :comment      => commentable.comments.build,
         :redirect_url => request.request_uri
   %>
