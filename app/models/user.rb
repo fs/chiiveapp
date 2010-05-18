@@ -104,7 +104,7 @@ class User < ActiveRecord::Base
   
   #find the user in the database, first by the facebook user id and if that fails through the email hash
   def self.find_by_fb_user(fb_user)
-    User.find_by_facebook_uid(fb_user.uid) || User.find_by_email_hash(fb_user.email_hashes)
+    User.find_by_facebook_uid(fb_user.uid)# || User.find_by_email_hash(fb_user.email_hashes)
   end
   
   #We are going to connect this user object with a facebook id. But only ever one account.
@@ -129,12 +129,12 @@ class User < ActiveRecord::Base
     
     # create a login based on their fb uid and a random password
     new_facebooker = User.new(:login => "facebooker_#{fb_user.uid.to_i}", :password => UUIDTools::UUID.timestamp_create().to_s, :email => "")
-    new_facebooker.first_name = fb_user.first_name
-    new_facebooker.last_name = fb_user.last_name
-    new_facebooker.name = fb_user.name
+    new_facebooker.first_name = "facebooker_#{fb_user.uid.to_i}"#fb_user.first_name
+    new_facebooker.last_name = "facebooker_#{fb_user.uid.to_i}"#fb_user.last_name
+    new_facebooker.name = "facebooker_#{fb_user.uid.to_i}"#fb_user.name
     
     new_facebooker.facebook_uid = fb_user.uid.to_i
-    new_facebooker.email_hash = fb_user.email_hashes[0] unless fb_user.email_hashes.blank?
+    # new_facebooker.email_hash = fb_user.email_hashes[0] unless fb_user.email_hashes.blank?
     
     # Validate now, which assigns default values like the auth_logic single_access_token
     new_facebooker.valid?
