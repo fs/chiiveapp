@@ -134,7 +134,7 @@ class User < ActiveRecord::Base
     new_facebooker.name = fb_user.name
     
     new_facebooker.facebook_uid = fb_user.uid.to_i
-    new_facebooker.email_hash = fb_user.email_hashes[0] unless fb_user.email_hashes.blank?
+    # new_facebooker.email_hash = fb_user.email_hashes[0] unless fb_user.email_hashes.blank?
     
     # Validate now, which assigns default values like the auth_logic single_access_token
     new_facebooker.valid?
