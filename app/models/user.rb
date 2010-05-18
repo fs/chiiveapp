@@ -129,9 +129,9 @@ class User < ActiveRecord::Base
     
     # create a login based on their fb uid and a random password
     new_facebooker = User.new(:login => "facebooker_#{fb_user.uid}", :password => UUIDTools::UUID.timestamp_create().to_s, :email => "")
-    new_facebooker.first_name = fb_user.first_name
-    new_facebooker.last_name = fb_user.last_name
-    new_facebooker.name = fb_user.name
+    new_facebooker.first_name = "facebooker_#{fb_user.uid}"#fb_user.first_name
+    new_facebooker.last_name = "facebooker_#{fb_user.uid}"#fb_user.last_name
+    new_facebooker.name = "facebooker_#{fb_user.uid}"#fb_user.name
     
     new_facebooker.facebook_uid = fb_user.uid.to_i
     # new_facebooker.email_hash = fb_user.email_hashes[0] unless fb_user.email_hashes.blank?
