@@ -1,0 +1,9 @@
+<% title "SocialSets" %>
+
+	<%= render :partial => 'anchor', :locals => { :user => @user } %>
+	
+<% @prev = nil %>
+
+<%= render @social_sets %>
+
+<%= will_paginate @social_sets %>

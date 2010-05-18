@@ -1,0 +1,528 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 				0;
+	padding: 				0;
+	border: 				0;
+	outline: 				0;
+	font-size: 				100%;
+	vertical-align:			baseline;
+	background: 			transparent;
+}
+* {
+	font-family: 			arial, helvetica, sans-serif;
+}
+
+html {
+	font-size: 				50%; /* Part one of 1em = 10px */
+	
+	height:					100%;
+}
+
+body {
+	line-height: 			1;
+	
+	font-size: 				125%; /* Part two of 1em = 10px */
+	
+	/*part 1 of centering hack*/
+	text-align: 			center;	
+	
+	background:				#e7f9ff url(../images/interface/bg_body.png) no-repeat center top;
+	
+	height:					100%;
+	padding:				0 0 1px 0;
+}
+
+a {
+	text-decoration:		none;
+	color:					#1fceec;
+}
+a:hover {
+	text-decoration:		underline;
+}
+
+ /* Good to have global classes
+--------------------------------*/
+.floatright {
+	float: 					right;
+}
+.floatleft {
+	float: 					left;
+}
+
+.alignright {
+	text-align:				right;
+}
+.half {
+	width:					48%;
+}
+.hide {
+	display:				none;
+}
+.nobg {
+	background:				none !important;
+}
+.noborder {
+	border:					0 !important;
+}
+.nomargin {
+	margin:					0 !important; 
+}
+
+
+ /* MAIN CONTAINER
+--------------------------------------------------------------------*/
+div.wrapper {
+	position:				relative;
+
+	width: 					921px;
+	
+	/*part 2 of centering hack*/
+	text-align: 			left;
+	margin: 				0 auto;
+}
+
+ /* HEADER
+--------------------------------------------------------------------*/
+#header {
+	height:					62px;
+	background: 			#67b620 url(../images/interface/bg_header.png) repeat-x 0 0;
+}
+#header div.wrapper {
+	height:					62px;
+	background: 			#67b620 url(../images/interface/bg_header.png) repeat-x 0 0;
+}
+
+#header #logo {
+	position:				absolute;
+	left:					7px;
+	top:					3px;
+}
+#header #logo img {
+	display:				block;
+}
+
+ /* Main Nav Setup
+--------------------------------*/
+
+#header #mainnav {
+	list-style-type:		none;
+	position:				absolute;
+	left:					236px;
+	top:					30px;
+}
+#header #mainnav li {
+	float:					left;
+	font-size:				1.8em;
+	line-height:			1.2em;
+	margin:					0 22px 0 0;
+}
+#header #mainnav li a {
+	color:					#fff;
+	text-decoration:		none;
+}
+#header #mainnav li a:hover {
+	color:					#d6f4b7;
+}
+
+ /* #body - Global elements (works in all columns)
+--------------------------------------------------------------------*/
+
+#body,
+#product_info {
+	padding:				84px 0 0 0;
+}
+
+#getchive {
+	clear:					both;
+	text-align:				center;
+	font-size:				2.4em;
+	line-height:			1.18em;
+	color:					#63666a;
+	margin:					0 0 64px 0;
+}
+#getchive a {
+	color:					#6ed010;
+	text-decoration:		none;
+}
+#getchive a:hover {
+	border-bottom:			2px solid #6ed010;
+}
+
+
+ /* #home
+--------------------------------------------------------------------*/
+
+#home {
+	background: 			transparent url(../images/interface/hr_home.png) no-repeat center 300px;
+}
+#home div.wrapper {
+	padding:				90px 0 0 0;
+}
+
+#home h1 {
+	font-size:				5.8em;
+	line-height:			0.8em;
+	color:					#313132;
+	width:					500px;
+	margin:					0 0 0 7px;
+}
+#home h2 {
+	font-size:				2.4em;
+	line-height:			1.3em;
+	color:					#343434;
+	margin:					0 0 0 18px;
+}
+
+#home p.intro {
+	font-size:				1.8em;
+	line-height:			1.5em;
+	color:					#737373;
+	width:					500px;
+	margin:					0 0 22px 11px;
+}
+#home p.intro a {
+	color:					#6ed00f;
+	text-decoration:		none;
+}
+#home p.intro a:hover {
+	border-bottom:			1px solid #6ed00f;
+}
+
+#home img.intro {
+	position:				absolute;
+	right:					-11px;
+	top:					30px;
+}
+
+#home #btn_appstore {
+	display:				inline;
+	padding:				0;
+}
+#home #btn_appstore a {
+	display:				block;
+	width:					200px;
+	height:					85px;
+	text-indent:			-9999px;
+	margin:					0 0 62px 10px;
+	background:				transparent url(../images/interface/btn_appstore_large.png) no-repeat 0 0;
+}
+#home #btn_appstore a:hover {
+	background-position:	0 -85px;
+}
+
+#home #how {
+	height:					246px;
+	list-style-type:		none;
+	position:				relative;
+	top:					-2px;
+	margin:					0 0 72px 0;
+}
+#home #how li {
+	width:					302px;
+	height:					246px;
+	float:					left;
+	color:					#fff;
+	font-size:				1.4em;
+	line-height:			1.2em;
+	font-weight:			bold;
+	margin:					0 7px 0 0;
+	background:				transparent url(../images/interface/bg_how.png) no-repeat;
+}
+#home #how li.no1 {
+	width:					220px;
+	height:					46px;
+	padding:				212px 50px 0 32px;
+	background-position:	0 0;
+}
+#home #how li.no2 {
+	width:					276px;
+	height:					46px;
+	padding:				200px 8px 0 18px;
+	background-position:	-302px 0;
+}
+#home #how li.no3 {
+	width:					284px;
+	height:					34px;
+	padding:				212px 0 0 18px;
+	background-position:	-604px 0;
+}
+#home #how a {
+	font-size:				1.4em;
+	padding:				0 0 0 20px;
+}
+
+ /* #maincontent
+--------------------------------------------------------------------*/
+
+#maincontent {
+	min-height:				450px;
+	width:					455px;
+	float:					left;
+	padding:				9px 0 94px 234px;
+	background: 			transparent url(../images/interface/bg_maincontent.png) no-repeat 14px 0;
+}
+#product_info #maincontent {
+	min-height:				450px;
+	width:					900px;
+	padding-left:			10px;
+	background: 			none;
+}
+
+#privacyterms {
+	min-height:				450px;
+	/*width:					921px;*/
+	float:					left;
+	padding:				0 50px 94px 93px;
+	color:					#737373;
+	font-size:				1.4em;
+	line-height:			1.8em;
+}
+
+#privacyterms ul {
+	padding:			0 0 0 30px;
+}
+	
+#privacyterms li {
+	padding:			6px 90px 6px 0;
+}
+
+#product_info h1,
+#product_info h2,
+#product_info h3,
+#product_info p,
+#product_info li {
+	width: 650px;
+}
+
+#maincontent h1, #privacyterms h1 {
+	font-size:				3em;
+	line-height:			1.2em;
+	color:					#313132;
+	font-weight:			normal;
+	margin:					0 0 27px 0;
+}
+#maincontent h2 {
+	font-size:				1.6em;
+	line-height:			1.4em;
+	color:					#313132;
+}
+#maincontent h3 {
+	font-size:				1.5em;
+	line-height:			1.68em;
+	color:					#313132;
+}
+
+#maincontent p,
+#maincontent li {
+	color:					#737373;
+	font-size:				1.4em;
+	line-height:			1.8em;
+
+}
+
+#maincontent p {
+	margin:					0 0 26px 0;
+}
+#maincontent p.extramargin {
+	margin:					0 0 50px 0;
+}
+
+#maincontent p.intro {
+	font-size:				1.8em;
+	line-height:			1.4em;
+	color:					#313131;
+}
+
+#maincontent ul {
+	margin:					0 0 27px 17px;
+}
+
+#maincontent div.title {
+	font-size:				1.3em;
+	line-height:			1.48em;
+	color:					#313132;
+	margin:					0 0 3px 0;
+}
+
+#maincontent #press p a {
+	font-size:				1.14em;
+}
+#maincontent #press p.intro a {
+	font-size:				0.89em;
+}
+
+#maincontent #press img {
+	display:				block;
+	border:					1px solid #e1e4e5;
+} 
+
+#maincontent #press div.logolarge {
+	margin:					0 0 50px 0;
+}
+#maincontent #press div.logosmall {
+	margin:					0 0 26px 0;
+}
+
+#maincontent #contactus h2 {
+	font-size:				1.8em;
+	font-weight:			normal;
+} 
+#maincontent #contactus p {
+	font-size:				1.6em;
+	margin:					0 0 23px 0;
+}
+
+
+#maincontent input.type_text {
+	width:					358px;
+	height:					37px;
+	padding:				2px 0 0 11px;
+	font-size:				1.8em;
+	line-height:			2em;
+	color:					#afafaf;
+	font-style:				italic;
+	border:					0;
+	margin:					0 0 34px 0;
+	background: 			#fff url(../images/interface/bg_textinput.png) no-repeat 0 0;
+}
+#maincontent input.active {
+	color:					#313132;
+	font-style:				normal;
+}
+#maincontent .submit {
+	margin:					32px 0 12px 92px;
+}
+.jsactive #maincontent input.submit {
+	display:				none;
+}
+
+#maincontent p.spam {
+	margin-left:			62px;
+}
+
+#maincontent form a.submit {
+	display:				block;
+	width:					185px;
+	height:					37px;
+	padding:				6px 0 0 0;
+	text-align:				center;
+	font-size:				2.3em;
+	line-height:			1.2em;
+	color:					#fff;
+	text-decoration:		none;
+	background: 			transparent url(../images/interface/btn_submit.png) no-repeat 0 0;
+}
+#maincontent form a.submitting {
+	color:					#a1a1a1;
+}
+
+#maincontent form label.error {
+	display:				block;
+	height:					19px;
+	font-size:				1.3em;
+	line-height:			1.2em;
+	color:					#ff5a00;
+	margin:					-19px 0 0 0;
+}
+
+#maincontent span.dark {
+	color:					#313132;
+}
+
+ /* #sidebar
+--------------------------------------------------------------------*/
+
+#sidebar {
+	width:					169px;
+	float:					right;
+	padding:				70px 0 0 0;
+	margin:					0 32px 0 0;
+}
+
+#product_info #sidebar {
+	position:				absolute;
+	right:					0;
+}
+#product_info #sidebar p {
+	width:					inherit;
+}
+
+#sidebar h4 {
+	font-weight:			normal;
+	font-size:				1.6em;
+	line-height:			1.56em;
+	color:					#313132;
+	margin:					0 0 4px 0;
+	padding:				0 0 0 14px;
+}
+
+#sidebar #btn_appstore {
+	display:				inline;
+	padding:				0;
+}
+#sidebar #btn_appstore a {
+	display:				block;
+	width:					169px;
+	height:					73px;
+	text-indent:			-9999px;
+	margin:					0 0 24px 0;
+	background:				transparent url(../images/interface/btn_appstore.png) no-repeat 0 0;
+}
+#sidebar #btn_appstore a:hover {
+	background-position:	0 -73px;
+}
+
+
+#sidebar p {
+	font-size:				1.3em;
+	line-height:			1.56em;
+	color:					#737373;
+	padding:				0 0 0 7px;
+	margin:					0 0 20px 0;
+}
+
+ /* #footer
+--------------------------------------------------------------------*/
+#footer {
+	clear:					both;
+	padding:				0 0 40px 0;
+}
+#footer div.wrapper {
+	border-top:				1px solid #d1dde0;
+}
+#footer p {
+	font-size:				1.2em;
+	line-height:			1.2em;
+	color:					#737373;
+	word-spacing:			6px;
+	padding:				13px 0 0 17px;
+}
+#footer p a,
+#footer p span {
+	word-spacing:			0;
+}
+
+
+table {
+	border-collapse:		collapse;
+	border-spacing: 		0;
+}  
+
+
+.clearfix:after {
+    content: 				"."; 
+    display: 				block; 
+    height: 				0; 
+    clear: 					both; 
+    visibility: 			hidden;
+}
+.clearfix {
+	min-width: 				0;
+}

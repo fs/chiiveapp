@@ -1,0 +1,11 @@
+<div id="comments">
+  <span class="blurb">&nbsp;</span>
+  <%= render commentable.comments %>
+</div>
+
+<div id="postcomment">
+  <%= render 'comments/form',
+        :comment      => commentable.comments.build,
+        :redirect_url => request.request_uri
+  %>
+</div>

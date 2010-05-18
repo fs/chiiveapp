@@ -1,0 +1,32 @@
+<div class="info">
+	<h3>
+		<span id="eip_post-<%= post.id %>-title" class="eip-value"><%=h post.pretty_title %></span>
+		<%= link_for_edit_in_place(edit_user_post_path(current_user, post), "post", "title", {:id => post.id}) if current_user and post.user == current_user %>
+	</h3>
+	<p class="meta">
+		<!-- <span class="date"><%= post.time_at.strftime("%B %e, %Y, %I:%M%P") %></span> -->
+		<span class="date"><%= post.pretty_time_at() %></span>
+		<br />
+		Taken By: <span class="user"><%= link_to post.user.pretty_name, user_social_sets_path(post.user) %></span>
+	</p>
+	<p class="description">
+		<span id="eip_post-<%= post.id %>-text" class="eip-value"><%=h post.pretty_text %></span>
+		<%= link_for_edit_in_place(edit_user_post_path(current_user, post), "post", "text", {:id => post.id}) if current_user and post.user == current_user %>
+	</p>
+	<p class="comments">
+		
+		<!-- To avoid #ERRORS# We leave the link to user_personal_set_post_path for those personal_sets with no SocialSet assigned to -->
+		<% if post.social_set.nil? != true %>
+			<%= link_to("Post Comments: #{post.comments.count} ", user_social_set_post_path(post.user, post.social_set, post), :id => "comment_post#{post.id}_social_set#{post.social_set.id}") %>
+		<% else %>
+			<%= link_to("Post Comments: #{post.comments.count} ", user_post_path(post.user, post), :id => "comment_post#{post.id}") %>
+		<% end %>
+		
+	</p>
+</div>
+
+<% if current_user and current_user == post.user %>
+<div class="admin">
+	<%= link_to "Delete", user_social_set_post_path(current_user, post.social_set, post), :class => 'delete' %>
+</div>
+<% end %>

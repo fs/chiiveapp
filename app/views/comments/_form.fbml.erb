@@ -1,0 +1,10 @@
+<% form_for comment do |f| %>
+  <%= f.hidden_field :commentable_id %>
+	<%= f.hidden_field :commentable_type %>
+	<%= hidden_field_tag :redirect_url, redirect_url  %>
+	<div>
+	  <%= fb_user_avatar(current_user) %>
+	  <%= f.text_area :body, :title => 'Add a Comment' %>
+    <%= f.submit 'Post', :class => 'post-comment' %>
+	</div>
+<% end %>

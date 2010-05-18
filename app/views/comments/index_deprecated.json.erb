@@ -1,0 +1,1 @@
+[<%= @comments.map { |comment| render :partial => 'comment_deprecated', :locals => { :comment => comment } }.join(",") -%>]

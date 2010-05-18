@@ -1,0 +1,21 @@
+* html #logo {
+	filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/logo.png');
+}
+* html #logo img {
+	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0);
+}
+
+* html #sidebar {
+	display: inline;
+}
+
+* html #maincontent {
+	height:	450px;
+}
+
+* html .floatright,
+* html .floatleft {
+	display:					inline; /*to avoid IE double margin bug*/
+}
+* html .clearfix {height: 1%;}
+

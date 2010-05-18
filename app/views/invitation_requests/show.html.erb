@@ -1,0 +1,23 @@
+<p>
+  <b>Name:</b>
+  <%=h @invitation_request.name %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%=h @invitation_request.email %>
+</p>
+
+<p>
+  <b>Invitation sent:</b>
+  <%=h @invitation_request.sent_at %>
+</p>
+
+<p>
+  <b>Invitation accepted:</b>
+  <%=h @invitation_request.accepted_at %>
+</p>
+
+
+<%= link_to 'Edit', edit_invitation_request_path(@invitation_request) %> |
+<%= link_to 'Back', invitation_requests_path %>

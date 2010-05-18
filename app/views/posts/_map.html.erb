@@ -1,0 +1,8 @@
+<% unless map.nil? %>
+	<% content_for(:footer) do %> 
+		<%= map.to_html %>
+	<% end %>
+	
+	<%= map.div(:class => "map") %>
+	
+<% end %>

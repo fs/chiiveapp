@@ -1,0 +1,10 @@
+<%
+@title = "Subscribers"
+%>
+<h1>Subscribers</h1>
+
+<p>
+<% @subscribers.each do |subscriber| %>
+<%=h subscriber.first_name %>, <%= link_to 'Remove', subscriber, :confirm => 'Are you sure?', :method => :delete %><br />
+<% end %>
+</p>

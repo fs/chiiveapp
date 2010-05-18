@@ -1,0 +1,129 @@
+<div class="personal_set" id="social_set<%= social_set.id %>">
+	<div class="head">
+		<span class="floatright">
+
+<%-
+#			<p class="comments_count">
+#				< %= link_to("PersonalSet Comments: #{personal_set.comments.count} ", user_personal_set_path(personal_set.user, personal_set), :id => "comment_personal_set#{personal_set.id}") % >
+#			</p> 
+%>
+		</span>
+		
+		<h3>
+			<% if !social_set.default_personal_set %>
+				<span id="eip_social_set-<%= social_set.id %>-title" class="eip-value">#<%=h social_set.id %>: NO PERSONAL SET (feel free to delete the SocialSet)</span>
+			<% else %>
+				<span id="eip_social_set-<%= social_set.id %>-title" class="eip-value">#<%=h social_set.id %>: <%=h social_set.title %></span>
+				<br />
+				<span style="font-size: .5em;"><%= social_set.uuid %>
+					<ul>
+						<li>* x: <%= social_set.latitude %></li>
+						<li>* y: <%= social_set.longitude %></li>
+						<li>* time: <%= social_set.time_at %></li>
+					</ul>
+			<% end %>
+		</h3>
+<%-
+#		< %=h personal_set.pretty_duration % ><br />
+#		< %=h personal_set.pretty_address % >, radius: < %= personal_set.radius.round(2) % >km
+%>
+	</div>
+	
+		<div style="padding:20px; margin-bottom:20px;" id="new_post_form_<%= social_set.id %>">
+				<% 
+				  if !!current_user 
+					personal_set = social_set.personal_sets.find_by_user_id(current_user.id)
+					if personal_set.nil? 
+						concat "<div class=\"button\">"
+						concat link_to("+ Check IN v.3", user_social_sets_path(current_user, :social_set => {:id => social_set.uuid, :personal_sets_attributes => [{:longitude => "0", :latitude => "0", :time_at => "01/01/1970"}] }), :method => "post")
+						concat "</div>"
+				 	else
+					  concat "<div class=\"button\">"
+					  concat link_to("+ new Post", new_user_social_set_post_path(current_user, social_set), :onclick => "	$.ajax({url: '#{new_user_social_set_post_path(current_user, social_set)}', dataType: 'script'}); return false;")
+					  concat "</div>"
+					  if personal_set.posts.size == 0
+						concat "<div class=\"button\">"
+						concat link_to("+ Check OUT v.2", user_social_set_path(current_user, social_set), :method => "delete")
+						concat "</div>"
+					  end
+					end
+				  end 
+				%>
+		</div>
+	
+	<div class="body">
+		
+		<% content_for(:footer) do %>
+			<%= create_social_set_map(social_set) %>
+		<% end %>
+		
+		<div class="related">
+			<%= create_social_set_map_container(social_set) %>
+			<ul class="friends">
+				<% social_set.personal_sets.each do |personal_set| -%>
+				<%= render personal_set.user %><br />
+				<% end -%>
+			</ul>
+		</div>
+		<div class="photos">
+			<div class="main" id="social_set_photo_<%= social_set.id %>">
+				<div class="image">
+					<%-
+						# NOTE: We shouldn't need to check for the existence of default_personal_set
+						# 		because there should always be one, but for backwards compatibility
+						# 		it won't hurt us either
+					 -%>
+					<% if social_set.default_personal_set and not social_set.default_personal_set.posts.empty? %>
+						<%= image_tag(social_set.default_personal_set.posts.first.photo.url('iphone')) %>
+					<% end %>
+				</div>
+			</div>
+			
+			<div class="thumbs">
+<%-
+			social_set.posts.each do |post|
+				#if not post.empty?
+					thumb_class = post == social_set.posts.first ? 'post selected' : 'post'
+	
+					thumb_overlay_file = '/images/thumb_overlay'
+					if @user and post.user_id != @user.id #personal_set.user_id
+						thumb_overlay_file = thumb_overlay_file + '_friend'
+					end
+					if post.comments.count > 0
+						thumb_overlay_file = thumb_overlay_file + '_comments'
+					end
+					thumb_overlay_file = thumb_overlay_file + '.png'
+					image_style = "background: url(#{post.photo.url('iphone_preview')})"
+					image_src = thumb_overlay_file
+	
+					
+					#concat link_to(image_tag(image_src, :style => image_style), user_personal_set_post_path(post.user, personal_set, post), :id => "post#{post.id}_personal_set#{personal_set.id}", :class => thumb_class)
+					concat link_to(image_tag(image_src, :style => image_style), user_social_set_post_path(post.user, social_set, post), :id => "post#{post.id}_personal_set#{social_set.id}", :class => thumb_class)
+					
+					concat "<!--\n"
+					concat "%.0f" % ((@prev.time_at - post.time_at).abs / 60).to_s unless @prev.nil?
+					concat " minutes\n"
+					concat "%.2f" % (post.distance_from(@prev, :units=>:kms)).to_s unless @prev.nil?
+					concat " km\n-->"
+					@prev = post
+				#end
+			end
+%>
+			</div>
+		
+		</div>
+		
+		<div class="details">
+			<%-
+				# NOTE: We shouldn't need to check for the existence of default_personal_set
+				# 		because there should always be one, but for backwards compatibility
+				# 		it won't hurt us either
+			 -%>
+			<% if social_set.default_personal_set and not social_set.default_personal_set.posts.empty? %>
+				<%= render :partial => 'posts/details', :locals => { :post => social_set.default_personal_set.posts.first } %>
+			<% end %>
+		</div>
+		
+		<div class="clear"><!-- --></div>
+	</div>
+</div>

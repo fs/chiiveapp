@@ -1,0 +1,28 @@
+<%
+concat "{\"#{user.uuid}\":{"
+concat "\"name\":\"#{user.pretty_name}\","
+concat "\"first_name\":\"#{user.first_name}\","
+concat "\"last_name\":\"#{user.last_name}\","
+avatar_path = user.avatar_image.file? ? "http://#{request.host_with_port}#{user.avatar_image.url('small')}" : user.avatar
+concat "\"avatar\":\"#{avatar_path}\","
+
+if (current_user)
+	# check both sides of the relationship
+	friendship = current_user.get_friendship_from(user)
+	fandom = user.get_friendship_from(current_user)
+	
+	friendship_id = !friendship ? 0 : friendship.id
+	fandom_id = !fandom ? 0 : fandom.id
+	
+	concat "\"friendship_id\":#{friendship_id},"
+	concat "\"fandom_id\":#{fandom_id},"
+	
+	if (defined?(show_private_info) && show_private_info)
+		concat "\"single_access_token\":\"#{user.single_access_token}\","
+		concat "\"email\":\"#{user.email}\","		
+	end
+end
+
+concat "\"personal_sets_count\":\"#{user.personal_sets_count}\""
+concat "}}"
+%>

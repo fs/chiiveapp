@@ -1,0 +1,25 @@
+<% title @post.pretty_title %>
+
+	<%= create_post_map_container(@post) %>
+	<%= create_post_map(@post) %>
+
+	<div class="post show">
+		<%= content_tag :h5, link_to("Back to Posts", user_social_sets_path(@post.user)) %><br />
+	    <%= image_tag @post.photo.url('iphone') if @post.photo.file? %>
+	    <%= content_tag :h5, link_to(@post.user.pretty_name, user_path(@post.user)) if @post.user %>
+	    <%= content_tag :h3, link_to(@post.title, user_post_path(@post.user, @post)) %>
+	    <p>
+			<%= "#{@post.text}<br />" if @post.text %>
+			<%= @post.pretty_time_at %>
+	    </p>
+		<% if current_user && @post.user && current_user.id == @post.user.id %>
+		<p>
+		  <%= link_to "Edit", edit_user_post_path(@post.user, @post) %> |
+		  <%= link_to "Destroy", user_post_path(@post.user, @post), :confirm => 'Are you sure?', :method => :delete %>
+		</p>
+		<% end %>
+		
+		<div class="clear"><!-- --></div>
+	</div>
+
+<%= render :partial => 'comments/list' , :locals => { :commentable => @post, :redirect_url => request.request_uri } %>

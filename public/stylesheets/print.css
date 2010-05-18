@@ -1,0 +1,33 @@
+body {
+	background: 			white;
+	font-size: 				10pt;
+	font-family: 			Arial, Vardana, Helvetica, sans-serif;
+	margin:					0;
+	padding:				0;
+}
+
+
+a {
+	color: 					#000;
+	text-decoration: 		none;
+}
+
+img {
+	border: 				0;
+}
+
+li {
+	margin-bottom: 			8pt;
+}
+
+#maincontent h1 {
+	font-size:				1.5em;
+}
+
+#maincontent h2 {
+	font-size:				1.4em;
+}
+
+#maincontent h3 {
+	font-size:				1.3em;
+}

@@ -1,0 +1,1 @@
+[<%= @social_sets.map { |social_set| render :partial => social_set, :locals => { :posts_limit => 1 } }.join(",") -%>]

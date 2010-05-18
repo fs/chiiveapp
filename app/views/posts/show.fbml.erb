@@ -1,0 +1,24 @@
+<div id="info">
+  <% if @post.social_set.default_user %>
+    <%= fb_user_avatar(@post.social_set.default_user) %>
+	
+  	<p class="by">
+  	  <strong><%= fb_user_name(@post.social_set.default_user) %></strong> posted
+  	</p>
+	<% end %>
+	
+	<h1><%=h @post.social_set.title %></h1>
+	
+	<p class="count">
+	  <strong><%= pluralize @post.social_set.personal_sets.count, 'person' %></strong>
+	  took
+	  <strong><%= pluralize @post.social_set.posts.count, 'photo' %></strong>
+	</p>
+</div>
+
+<div id="photodetail">
+	<div id="ajaxloader" style="display: none;">&nbsp;</div>
+	<div id="photo_container" class="photocontent">
+    <%= render @post %>
+  </div>
+</div>

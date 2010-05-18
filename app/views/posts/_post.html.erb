@@ -1,0 +1,30 @@
+<div class="post" id="post<%= post.id %>">
+	
+	<% form_remote_tag :url => { :action => 'update', :id => post } do %> 
+	<%= submit_tag "Update" %> 
+	<% end %>
+	
+    <%= link_to image_tag(post.photo.url('small')), user_post_path(post.user, post) if post.photo.file? %>
+
+	<%= content_tag :h5, link_to(post.user.pretty_name, user_path(post.user)) if post.user %>
+
+	<%= content_tag :h3, link_to(post.title, user_post_path(post.user, post)) %>
+    
+	<p>
+		<%= "#{post.text}<br />" if post.text %>
+		<%= post.pretty_time_at %>
+		<br />
+		<span class="latitude"><%= post.latitude %></span>,
+		<span class="longitude"><%= post.longitude %></span>
+	</p>
+	
+	<% if current_user && post.user && current_user.id == post.user.id %>
+	
+	<p>
+	  <%= link_to "Edit", edit_user_post_path(post.user, post) %> |
+	  <%= link_to "Remove", user_post_path(post.user, post), :confirm => 'Are you sure?', :method => :delete %>
+	</p>
+	
+	<% end %>
+	<div class="clear"><!-- --></div>
+</div>
