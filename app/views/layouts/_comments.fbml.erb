@@ -2,7 +2,7 @@
   <% unless commentable.comments.blank? %>
     <span class="blurb">&nbsp;</span>
     <% commentable.comments.each do |comment| %>
-      <%= render 'comments/comments.fbml', :comment => comment %>
+      <%= render 'comments/comment.fbml', :comment => comment %>
     <% end %>
   <% end %>
 </div>
