@@ -1,6 +1,8 @@
 <div id="comments">
-  <span class="blurb">&nbsp;</span>
-  <%= render commentable.comments %>
+  <% unless commentable.comments.blank? %>
+    <span class="blurb">&nbsp;</span>
+    <%= render commentable.comments %>
+  <% end %>
 </div>
 
 <div id="postcomment">
