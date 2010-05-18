@@ -1,2 +1,0 @@
-personal_setId = params[:personal_set_id].blank? ? "" : "_"+params[:personal_set_id]
-page << "$('#new_post_form#{personal_setId}').show(); $('#new_post_form#{personal_setId}').html(\"#{escape_javascript(render :partial => 'form', :locals => { :post => Post.new({:user_id => params[:user_id]})})}\")"

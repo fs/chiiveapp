@@ -1,3 +1,0 @@
-page << "  $(\"#eip_post-#{@options[:id]}-#{@options[:attr]}\").each(function(){"
-page << "    $(this).editInPlace(#{@options.to_json});"
-page << "  });"
