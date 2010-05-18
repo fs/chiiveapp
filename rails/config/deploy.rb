@@ -7,8 +7,8 @@ set :scm, :git
 ssh_options[:forward_agent] = true
 
 # the url for your repository
-set :repository,  "git@github.com:arrel/qamio.git"
-set :branch, "master"
+set :repository,  "git@github.com:arrel/chiive.git"
+set :branch, "facebook"
 set :site_root, "rails"
 
 # Your svn / git login name

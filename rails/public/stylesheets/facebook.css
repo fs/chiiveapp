@@ -1,4 +1,4 @@
-html, body, div, span, applet, object, iframe,
+/*html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, font, img, ins, kbd, q, s, samp,
@@ -7,14 +7,15 @@ b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td {
-	margin: 				0;
-	padding: 				0;
-	border: 				0;
-	outline: 				0;
-	font-size: 				100%;
-	vertical-align:			baseline;
-	background: 			transparent;
+  margin:         0;
+  padding:        0;
+  border:         0;
+  outline:        0;
+  font-size:        100%;
+  vertical-align:     baseline;
+  background:       transparent;
 }
+*/
 * {
 	font-family: 			arial, helvetica, sans-serif;
 }
@@ -530,7 +531,7 @@ div.share .share_and_hide {
 
 .inner {position:relative;}
 span.share a {position:absolute;right:25px;top:5px;}
-span.share .uiButton {-moz-box-shadow:none}
+/*span.share .uiButton {-moz-box-shadow:none}
 span.share a span {
   color:#479905 !important;
   font-size:1.5em !important;
@@ -542,7 +543,21 @@ span.share a i {
   height:24px;
   width:24px;
   }
+*/
 input.post-comment {
+  display:inline-block;
+  vertical-align:top;
+  background:url(http://img692.imageshack.us/img692/9415/chiivebtn.png) 0 0 no-repeat;
+  line-height:33px;
+  height:33px;
+  color:#fff;
+  font-size:17px;
+  padding:0 13px;
+  font-weight:bold;
+  border:0;
+  width:76px;
+}
+/*input.post-comment {
   display:inline-block;
   vertical-align:top;
   background:url(http://chiiveapp.demo.flatsourcing.com/images/interface/sprites.png) 0 -60px repeat-x;
@@ -557,3 +572,4 @@ input.post-comment {
   -webkit-border-radius:11px;
   border-radius:11px;
 }
+*/
