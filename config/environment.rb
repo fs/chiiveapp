@@ -20,7 +20,7 @@ Rails::Initializer.run do |config|
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   config.gem "aws-s3", :lib => "aws/s3", :version => '0.6.2'
   config.gem "authlogic", :version => '2.0.13'
-  config.gem "facebooker", :version => '1.0.58'
+  config.gem "facebooker"#, :version => '1.0.58'
   config.gem "geokit", :version => '1.3.2'
   config.gem "uuidtools", :version => '2.1.1'
   config.gem "easy_roles", :source => 'http://gemcutter.org', :version => '0.4.2'  
